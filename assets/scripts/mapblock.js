@@ -7,7 +7,8 @@ cc.Class({
 	 type:0,
 	 icon:0,
 	 state:[],
-	 xx:1//阻力
+	 xx:1,//阻力
+     notpass:false,
     },
 
     // use this for initialization

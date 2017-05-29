@@ -86,7 +86,7 @@
     "action_power": 0,
     "x": 10,
     "y": 10,
-    "displacement": 3,
+    "displacement": 5,
     "icon": 0,
     "map": null
   },
@@ -122,7 +122,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "35c518buhFHLp+EfHgfU3p0",
+    "fileId": "6bb33j4gzJGgo+HTOmnDPiM",
     "sync": false
   }
 ]

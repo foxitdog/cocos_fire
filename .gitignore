@@ -1,0 +1,9 @@
+/*
+!assets
+!local
+!settings
+!/*.json
+!.gitignore
+*.meta
+*.log
+!/packages

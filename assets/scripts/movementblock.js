@@ -8,12 +8,17 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 		this.node.on("touchend",event=>{
-			thisrolenode.setPosition(this.movementblock.x*mapblockwidth,this.movementblock.y*mapblockwidth)
 			let role=thisrolenode.getComponent('role')
-			role.x=this.movementblock.x
-			role.y=this.movementblock.y
+			role.setPosition(this.movementblock.x,this.movementblock.y)
+			// thisrolenode.setPosition(this.movementblock.x*mapblockwidth,this.movementblock.y*mapblockwidth)
+			// role.x=this.movementblock.x
+			// role.y=this.movementblock.y
 			movementblocks.every(val=>{
 				movementblockpool.put(val)
+				return true
+			})
+			attackblocks.every(val=>{
+				attackblockpool.put(val)
 				return true
 			})
 		})

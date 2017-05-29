@@ -70,6 +70,7 @@ cc.Class({
 				let m=prafab.getComponent('mapblock')
 				m.x=i;
 				m.y=j;
+				// m.xx=Math.floor((Math.random()*2)+1)
 				prafab.parent=this.node
 				this.mapblocks.push(prafab)
 			}
@@ -84,10 +85,8 @@ cc.Class({
 			prefab.width=this.mapblockwidth
 			prefab.height=this.mapblockwidth
 			prefab.parent=this.node
-			prefab.setPosition(i*2*this.mapblockwidth,i*2*this.mapblockwidth)
 			let r=prefab.getComponent('role')
-			r.x=i*2
-			r.y=i*2
+			r.setPosition(i*2,i*2)
 			this.roles.push(prefab)
 		}		
 		// :}

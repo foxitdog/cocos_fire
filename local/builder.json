@@ -1,0 +1,23 @@
+{
+  "androidStudio": false,
+  "apiLevel": "",
+  "appABIs": [
+    "armeabi",
+    "arm64-v8a",
+    "x86",
+    "armeabi-v7a"
+  ],
+  "buildPath": "./build",
+  "debug": false,
+  "keystoreAlias": "",
+  "keystoreAliasPassword": "",
+  "keystorePassword": "",
+  "keystorePath": "",
+  "platform": "win32",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "sourceMaps": true,
+  "template": "default",
+  "useDebugKeystore": true,
+  "vsVersion": "auto"
+}

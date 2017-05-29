@@ -1,0 +1,24 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSdk": [
+    "anysdk"
+  ],
+  "inlineSpriteFrames": true,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.complete_project",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "5dcd99cb-77a4-4c95-a7d8-4b5b45295ae5",
+  "title": "complete_project",
+  "webOrientation": "auto"
+}

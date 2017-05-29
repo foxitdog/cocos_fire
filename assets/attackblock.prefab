@@ -12,12 +12,12 @@
     "__type__": "cc.Node",
     "_name": "attackblock",
     "_objFlags": 0,
-    "_opacity": 150,
+    "_opacity": 132.6,
     "_color": {
       "__type__": "cc.Color",
-      "r": 126,
-      "g": 7,
-      "b": 2,
+      "r": 155,
+      "g": 57,
+      "b": 53,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -106,7 +106,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c1713tkhRpHKoaE0Sm+X/CY",
+    "fileId": "46b429KztZJopfa7kbFwNHE",
     "sync": false
   }
 ]
