@@ -19,7 +19,6 @@ cc.Class({
 		y: 10,//地图中的位置y
 		displacement: 5,//位移
 		icon: 0,
-		map: cc.Node,
 	},
 
 	// use this for initialization
