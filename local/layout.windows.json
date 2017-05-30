@@ -84,8 +84,7 @@
         "timeline",
         "node-library"
       ]
-    },
-    "worker": {}
+    }
   },
   "panels": {
     "builder": {
