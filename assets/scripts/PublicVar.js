@@ -16,3 +16,7 @@ window.attackblockpool=new cc.NodePool('attackblock')//攻击块池
 window.attackblocks=[]//可攻击块对象数组，存放当前攻击块对象，无时意为对象都到攻击块池中 步骤：选中角色-显示移动区域和攻击区域
 window.thisrolenode=''//当前角色
 window.thisRoleAttackArea=[]//当前角色攻击范围区域 步骤：选中角色-显示移动攻击区域-选择位置-到达位置-显示攻击范围区域
+window.menu=''//菜单
+window.rolePanel=''//角色菜单
+window.buttonPool=new cc.NodePool('button')//按钮池
+window.button=''//按钮

@@ -1,36 +1,16 @@
 {
   "item-states": [
     {
-      "folded": false,
-      "id": "36ca0Ju3X1LE7ZhfuqmunI7"
-    },
-    {
-      "folded": true,
-      "id": "4d357KlnCNAKIE0P41XlaAv"
-    },
-    {
-      "folded": false,
-      "id": "2a77299oiNNJ4iiX5az0Znf"
-    },
-    {
-      "folded": true,
-      "id": "17ef10Tc31NpbfZ1q2T2kNj"
-    },
-    {
-      "folded": true,
-      "id": "3b1e2DxPE9GV5P8huWWvJMD"
-    },
-    {
-      "folded": true,
-      "id": "c604ckbDFVKr7TVEuU7yBpD"
-    },
-    {
       "folded": true,
       "id": "e4b850kb+RBapWXE3RezKby"
     },
     {
       "folded": true,
       "id": "bc6b7jIbAJFb7by/P/Ps2Sp"
+    },
+    {
+      "folded": false,
+      "id": "36ca0Ju3X1LE7ZhfuqmunI7"
     }
   ]
 }

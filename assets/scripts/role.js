@@ -19,6 +19,7 @@ cc.Class({
 		y: 10,//地图中的位置y
 		displacement: 5,//位移
 		icon: 0,
+		team:0,
 	},
 
 	// use this for initialization
@@ -87,13 +88,13 @@ cc.Class({
 	},
 	// 角色的位置移动会修改脚下的地图块的时候可以移动属性
 	setPosition(x,y){
-		mapblocks[this.x*mapheightnum+this.y].getComponent("mapblock").notpass=false
+		// mapblocks[this.x*mapheightnum+this.y].getComponent("mapblock").notpass=false
 		console.log(this.x*mapheightnum+this.y)
 		this.node.setPosition(x * mapblockwidth,y * mapblockwidth)
 		this.x=x
 		this.y=y
 		console.log(this.x*mapheightnum+this.y)
-		mapblocks[x*mapheightnum+y].getComponent("mapblock").notpass=true	
+		// mapblocks[x*mapheightnum+y].getComponent("mapblock").notpass=true	
 	},
 });
 

@@ -86,6 +86,7 @@ cc.Class({
 			prefab.height=this.mapblockwidth
 			prefab.parent=this.node
 			let r=prefab.getComponent('role')
+			r.team=i%2
 			r.setPosition(i*2,i*2)
 			this.roles.push(prefab)
 		}		
