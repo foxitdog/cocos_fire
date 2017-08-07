@@ -8,6 +8,7 @@ cc.Class({
 	// use this for initialization
 	onLoad: function () {
 		this.node.on("touchend", event => {
+			menu.active=false;
 			let role = thisrolenode.getComponent('role')
 			role.setPosition(this.movementblock.x, this.movementblock.y)
 			// thisrolenode.setPosition(this.movementblock.x*mapblockwidth,this.movementblock.y*mapblockwidth)

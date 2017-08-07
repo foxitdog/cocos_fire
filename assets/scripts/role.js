@@ -19,81 +19,102 @@ cc.Class({
 		y: 10,//地图中的位置y
 		displacement: 5,//位移
 		icon: 0,
-		team:0,
+		team: 0,
 	},
 
 	// use this for initialization
 	onLoad: function () {
 
 		this.node.on("touchend", event => {
-			console.time('touched')
-			movementblocks.every(val => {
-				movementblockpool.put(val)
-				return true
+			buttonList.forEach((val)=>{
+				buttonPool.put(val);
 			})
-			attackblocks.every(val => {
-				attackblockpool.put(val)
-				return true
-			})
-			thisrolenode = this.node
-			getmovementblocks(this)
-			getattackblocks(this)
-			movementblocks = [];
-			for (let i in this.movementblocks) {
-				let b = this.movementblocks[i]
-				let node;
-				if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-					node = movementblockpool.get();
-				} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-					node = cc.instantiate(movementblock)
-					movementblockpool.put(node);
-					node = movementblockpool.get();
-				}
-				node.getComponent('movementblock').movementblock = b
-				node.width = mapblockwidth
-				node.height = mapblockwidth
-				node.setPosition(b.x * mapblockwidth, b.y * mapblockwidth)
-				//[10,248,0,62] 绿色
-				//[126,7,2,150] 红色
-				node.parent = gamenode
-				movementblocks.push(node)//存放块
+			buttonList=[];
+			let bn;
+			if (buttonPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+				bn = buttonPool.get();
+			} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+				bn = cc.instantiate(button);
+				buttonPool.put(bn);
+				bn = buttonPool.get();
 			}
-			attackblocks = [];
-			for (let i in this.attackblocks) {
-				let b = this.attackblocks[i]
-				let node;
-				if (attackblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-					node = attackblockpool.get();
-				} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-					node = cc.instantiate(attackblock)
-					attackblockpool.put(node);
-					node = attackblockpool.get();
+			// var x = new Number(Math.random()).toPrecision(5)
+			bn.getChildByName("Label").getComponent("cc.Label").string = '移动';
+			bn.setPosition(0, 0);
+			bn.on("touchend", movementblockShow.bind(this));
+			bn.parent = menu;
+			buttonList.push(bn);
+			menu.active=true;
+
+			function movementblockShow() {
+				console.time('touched')
+				movementblocks.every(val => {
+					movementblockpool.put(val)
+					return true
+				})
+				attackblocks.every(val => {
+					attackblockpool.put(val)
+					return true
+				})
+				thisrolenode = this.node
+				getmovementblocks(this)
+				getattackblocks(this)
+				movementblocks = [];
+				for (let i in this.movementblocks) {
+					let b = this.movementblocks[i]
+					let node;
+					if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+						node = movementblockpool.get();
+					} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+						node = cc.instantiate(movementblock)
+						movementblockpool.put(node);
+						node = movementblockpool.get();
+					}
+					node.getComponent('movementblock').movementblock = b
+					node.width = mapblockwidth
+					node.height = mapblockwidth
+					node.setPosition(b.x * mapblockwidth, b.y * mapblockwidth)
+					//[10,248,0,62] 绿色
+					//[126,7,2,150] 红色
+					node.parent = gamenode
+					movementblocks.push(node)//存放块
 				}
-				node.getComponent('attackblock').attackblock = b
-				node.width = mapblockwidth
-				node.height = mapblockwidth
-				node.setPosition(b.x * mapblockwidth, b.y * mapblockwidth)
-				//[10,248,0,62] 绿色
-				//[126,7,2,150] 红色
-				node.parent = gamenode
-				attackblocks.push(node)//存放块
+				attackblocks = [];
+				for (let i in this.attackblocks) {
+					let b = this.attackblocks[i]
+					let node;
+					if (attackblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+						node = attackblockpool.get();
+					} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+						node = cc.instantiate(attackblock)
+						attackblockpool.put(node);
+						node = attackblockpool.get();
+					}
+					node.getComponent('attackblock').attackblock = b
+					node.width = mapblockwidth
+					node.height = mapblockwidth
+					node.setPosition(b.x * mapblockwidth, b.y * mapblockwidth)
+					//[10,248,0,62] 绿色
+					//[126,7,2,150] 红色
+					node.parent = gamenode
+					attackblocks.push(node)//存放块
+				}
+				console.timeEnd('touched')
 			}
-			console.timeEnd('touched')
 		})
 	},
-
 	// called every frame
 	update: function (dt) {
 
 	},
 	// 角色的位置移动会修改脚下的地图块的时候可以移动属性
-	setPosition(x,y){
+	setPosition(x, y) {
 		// mapblocks[this.x*mapheightnum+this.y].getComponent("mapblock").notpass=false
-		console.log(this.x*mapheightnum+this.y)
-		this.node.setPosition(x * mapblockwidth,y * mapblockwidth)
-		this.x=x
-		this.y=y
-		console.log(this.x*mapheightnum+this.y)
+		console.log(this.x * mapheightnum + this.y)
+		this.node.setPosition(x * mapblockwidth, y * mapblockwidth)
+		this.x = x
+		this.y = y
+		console.log(this.x * mapheightnum + this.y)
 		// mapblocks[x*mapheightnum+y].getComponent("mapblock").notpass=true	
 	},
 });

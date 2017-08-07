@@ -17,6 +17,7 @@ window.attackblocks=[]//可攻击块对象数组，存放当前攻击块对象�
 window.thisrolenode=''//当前角色
 window.thisRoleAttackArea=[]//当前角色攻击范围区域 步骤：选中角色-显示移动攻击区域-选择位置-到达位置-显示攻击范围区域
 window.menu=''//菜单
+window.buttonList=[];
 window.rolePanel=''//角色菜单
 window.buttonPool=new cc.NodePool('button')//按钮池
 window.button=''//按钮
