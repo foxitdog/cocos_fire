@@ -19,5 +19,5 @@ window.thisRoleAttackArea=[]//当前角色攻击范围区域 步骤：选中角�
 window.menu=''//菜单
 window.buttonList=[];
 window.rolePanel=''//角色菜单
-window.buttonPool=new cc.NodePool('button')//按钮池
+window.buttonPool=new cc.NodePool('role')//按钮池
 window.button=''//按钮

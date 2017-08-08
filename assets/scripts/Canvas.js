@@ -14,6 +14,10 @@ cc.Class({
         var m = this.node.getChildByName("menu");
         menu = m;
         var r = this.node.getChildByName("rolePanel");
+        var c = r.getChildByName("close");
+        c.on("touchend", () => {
+            r.active = false
+        })
         rolePanel = r;
         m.active = false;
         r.active = false;

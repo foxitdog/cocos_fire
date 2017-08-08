@@ -1,3 +1,4 @@
+var roles = require('./rolesProperty');
 cc.Class({
 	extends: cc.Component,
 
@@ -24,30 +25,57 @@ cc.Class({
 
 	// use this for initialization
 	onLoad: function () {
-
 		this.node.on("touchend", event => {
-			buttonList.forEach((val)=>{
+			var role = { menu: ['move'] };
+			if (roles.hasOwnProperty(this.id)) {
+				role = roles[this.id]
+			}
+			buttonList.forEach((val) => {
 				buttonPool.put(val);
 			})
-			buttonList=[];
-			let bn;
-			if (buttonPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-				bn = buttonPool.get();
-			} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-				bn = cc.instantiate(button);
-				buttonPool.put(bn);
-				bn = buttonPool.get();
+			movementblocks.every(val => {
+				movementblockpool.put(val)
+				return true
+			})
+			attackblocks.every(val => {
+				attackblockpool.put(val)
+				return true
+			})
+			buttonList = [];
+			for (let t = 0; t < role.menu.length; t++) {
+				let bn;
+				if (buttonPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+					bn = buttonPool.get();
+				} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+					bn = cc.instantiate(button);
+					buttonPool.put(bn);
+					bn = buttonPool.get();
+				}
+				// var x = new Number(Math.random()).toPrecision(5)
+				bn.type = role.menu[t];
+				bn.getChildByName("Label").getComponent("cc.Label").string = role.menu[t];
+				bn.setPosition(0, 0);
+				if (role.menu[t] == 'move') {
+					bn.on("touchend", movementblockShow.bind(this));
+				} else if (role.menu[t] == 'prop') {
+					bn.on("touchend", showMenu.bind(this));
+				}
+				bn.parent = menu;
+				buttonList.push(bn);
+				menu.active = true;
 			}
-			// var x = new Number(Math.random()).toPrecision(5)
-			bn.getChildByName("Label").getComponent("cc.Label").string = '移动';
-			bn.setPosition(0, 0);
-			bn.on("touchend", movementblockShow.bind(this));
-			bn.parent = menu;
-			buttonList.push(bn);
-			menu.active=true;
+			function showMenu() {
+				// m.active = false;
+				rolePanel.active = true;
+			}
+
 
 			function movementblockShow() {
 				console.time('touched')
+				buttonList.forEach((val) => {
+					buttonPool.put(val);
+				})
+				menu.active = false;
 				movementblocks.every(val => {
 					movementblockpool.put(val)
 					return true
@@ -117,6 +145,21 @@ cc.Class({
 		console.log(this.x * mapheightnum + this.y)
 		// mapblocks[x*mapheightnum+y].getComponent("mapblock").notpass=true	
 	},
+	reuse:()=> {
+		console.log(1111111)
+		console.log(this)
+	},
+	unuse:()=>{
+		// bn.getChildByName("Label").getComponent("cc.Label").string = role.menu[t];
+		// bn.setPosition(0, 0);
+		// if (role.menu[t] == 'move') {
+		// 	bn.on("touchend", movementblockShow(), this);
+		// } else if (role.menu[t] == 'prop') {
+		// 	bn.on("touchend", showMenu(), this);
+		// }
+		console.log(this)
+	}
+
 });
 
 function getattackblocks(that) {
