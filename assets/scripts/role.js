@@ -26,12 +26,14 @@ cc.Class({
 	// use this for initialization
 	onLoad: function () {
 		this.node.on("touchend", event => {
+			event.stopPropagation()
 			var role = { menu: ['move'] };
 			if (roles.hasOwnProperty(this.id)) {
 				role = roles[this.id]
 			}
 			buttonList.forEach((val) => {
 				buttonPool.put(val);
+				console.log('put')
 			})
 			movementblocks.every(val => {
 				movementblockpool.put(val)
@@ -43,22 +45,28 @@ cc.Class({
 			})
 			buttonList = [];
 			for (let t = 0; t < role.menu.length; t++) {
+				let func = {};
+				if (role.menu[t] == 'move') {
+					func = movementblockShow;
+				} else if (role.menu[t] == 'prop') {
+					func = showMenu;
+				}
 				let bn;
 				if (buttonPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-					bn = buttonPool.get();
+					bn = buttonPool.get(func, this);
 				} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
 					bn = cc.instantiate(button);
 					buttonPool.put(bn);
-					bn = buttonPool.get();
+					bn = buttonPool.get(func, this);
 				}
 				// var x = new Number(Math.random()).toPrecision(5)
 				bn.type = role.menu[t];
 				bn.getChildByName("Label").getComponent("cc.Label").string = role.menu[t];
 				bn.setPosition(0, 0);
 				if (role.menu[t] == 'move') {
-					bn.on("touchend", movementblockShow.bind(this));
+					bn.on("touchend", movementblockShow, this);
 				} else if (role.menu[t] == 'prop') {
-					bn.on("touchend", showMenu.bind(this));
+					bn.on("touchend", showMenu, this);
 				}
 				bn.parent = menu;
 				buttonList.push(bn);
@@ -66,12 +74,16 @@ cc.Class({
 			}
 			function showMenu() {
 				// m.active = false;
+				// buttonList.forEach((val) => {
+				// 	buttonPool.put(val);
+				// })
+				// menu.active = false;
 				rolePanel.active = true;
 			}
 
 
 			function movementblockShow() {
-				console.time('touched')
+				// console.time('touched')
 				buttonList.forEach((val) => {
 					buttonPool.put(val);
 				})
@@ -127,7 +139,7 @@ cc.Class({
 					node.parent = gamenode
 					attackblocks.push(node)//存放块
 				}
-				console.timeEnd('touched')
+				// console.timeEnd('touched')
 			}
 		})
 	},
@@ -138,18 +150,15 @@ cc.Class({
 	// 角色的位置移动会修改脚下的地图块的时候可以移动属性
 	setPosition(x, y) {
 		// mapblocks[this.x*mapheightnum+this.y].getComponent("mapblock").notpass=false
-		console.log(this.x * mapheightnum + this.y)
 		this.node.setPosition(x * mapblockwidth, y * mapblockwidth)
 		this.x = x
 		this.y = y
-		console.log(this.x * mapheightnum + this.y)
 		// mapblocks[x*mapheightnum+y].getComponent("mapblock").notpass=true	
 	},
-	reuse:()=> {
-		console.log(1111111)
+	reuse: () => {
 		console.log(this)
 	},
-	unuse:()=>{
+	unuse: () => {
 		// bn.getChildByName("Label").getComponent("cc.Label").string = role.menu[t];
 		// bn.setPosition(0, 0);
 		// if (role.menu[t] == 'move') {

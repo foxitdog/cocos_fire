@@ -20,10 +20,8 @@ cc.Class({
     },
 
 	reuse:()=>{
-		// console.log('reuse')
 	},
 	unuse:()=>{
-		// console.count('unuse')
 	}
 	,
 

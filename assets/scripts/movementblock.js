@@ -10,6 +10,7 @@ cc.Class({
 		this.node.on("touchend", event => {
 			buttonList.forEach((val) => {
 				buttonPool.put(val);
+				console.log('asdfasdf')
 			})
 			menu.active = false;
 			let role = thisrolenode.getComponent('role')

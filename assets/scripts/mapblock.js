@@ -22,6 +22,7 @@ cc.Class({
             console.log('x:' + this.x + ",y:" + this.y)
             buttonList.forEach((val) => {
                 buttonPool.put(val);
+                console.log('asdfasdf')
             })
             menu.active = false;
             movementblocks.every(val => {

@@ -9,7 +9,6 @@ cc.Class({
 
 
     onLoad: function () {
-        console.log(this.button);
         button = this.button;
         var m = this.node.getChildByName("menu");
         menu = m;
