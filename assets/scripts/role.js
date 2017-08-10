@@ -3,10 +3,11 @@ cc.Class({
 	extends: cc.Component,
 
 	properties: {
-		id: '',// 名称
+		id: '',// 编号
+		_name: '_0',// 名称
 		job: 0,// 职业
-		maxattackrang: 2,//最大攻击范围
-		minattackrang: 0,//最小攻击范围
+		maxattackrang: 5,//最大攻击范围
+		minattackrang: 1,//最小攻击范围
 		hp: 0,// 血量
 		strength: 0,// 力量
 		technic: 0,// 技巧
@@ -414,7 +415,17 @@ function getmovementblocks(that) {
 					// 标记唯一maplock和唯一gridlock
 					// xx1(val, g, gridB, key, isable, movementblocks)
 					let m = mapblocks[key].getComponent('mapblock')
-					if (!m.notpass) {
+					var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
+					roleList.some(roleNode => {
+						var role = roleNode.getComponent('role');
+						if (role.x == (g.x - 1) && role.y == g.y && role.team != that.team) {
+							hasEnemyOrNeutral = true;
+							console.log("hasEnemyOrNeutral")
+							return true;
+						}
+						return false;
+					})
+					if (!m.notpass && !hasEnemyOrNeutral) {
 						let cha = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
 						// 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
 						if (cha >= 0) {// 可到达
@@ -452,7 +463,17 @@ function getmovementblocks(that) {
 					// 标记唯一maplock和唯一gridlock
 					// xx1(val, g, gridB, key, isable, movementblocks)
 					let m = mapblocks[key].getComponent('mapblock')
-					if (!m.notpass) {
+					var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
+					roleList.some(roleNode => {
+						var role = roleNode.getComponent('role');
+						if (role.x == g.x && role.y == (g.y - 1) && role.team != that.team) {
+							hasEnemyOrNeutral = true;
+							console.log("hasEnemyOrNeutral")
+							return true;
+						}
+						return false;
+					})
+					if (!m.notpass && !hasEnemyOrNeutral) {
 						let cha = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
 						// 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
 						if (cha >= 0) {// 可到达
@@ -490,7 +511,17 @@ function getmovementblocks(that) {
 					// 标记唯一maplock和唯一gridlock
 					// xx1(val, g, gridB, key, isable, movementblocks)
 					let m = mapblocks[key].getComponent('mapblock')
-					if (!m.notpass) {
+					var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
+					roleList.some(roleNode => {
+						var role = roleNode.getComponent('role');
+						if (role.x == (g.x + 1) && role.y == g.y && role.team != that.team) {
+							hasEnemyOrNeutral = true;
+							console.log("hasEnemyOrNeutral")
+							return true;
+						}
+						return false;
+					})
+					if (!m.notpass && !hasEnemyOrNeutral) {
 						let cha = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
 						// 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
 						if (cha >= 0) {// 可到达
@@ -529,7 +560,17 @@ function getmovementblocks(that) {
 					// xx1(val, g, gridB, key, isable, movementblocks)
 					// {:重复的部分
 					let m = mapblocks[key].getComponent('mapblock')
-					if (!m.notpass) {
+					var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
+					roleList.some(roleNode => {
+						var role = roleNode.getComponent('role');
+						if (role.x == g.x && role.y == (g.y + 1) && role.team != that.team) {
+							hasEnemyOrNeutral = true;
+							console.log("hasEnemyOrNeutral")
+							return true;
+						}
+						return false;
+					})
+					if (!m.notpass && !hasEnemyOrNeutral) {
 						let cha = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
 						// 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
 						if (cha >= 0) {// 可到达

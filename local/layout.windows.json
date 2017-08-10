@@ -48,7 +48,7 @@
                 "width": 923
               },
               {
-                "active": 1,
+                "active": 0,
                 "children": [
                   "console",
                   "timeline"
@@ -84,7 +84,8 @@
         "timeline",
         "node-library"
       ]
-    }
+    },
+    "worker": {}
   },
   "panels": {
     "builder": {

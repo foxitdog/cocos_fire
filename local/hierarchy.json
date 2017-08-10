@@ -1,10 +1,6 @@
 {
   "item-states": [
     {
-      "folded": false,
-      "id": "36ca0Ju3X1LE7ZhfuqmunI7"
-    },
-    {
       "folded": true,
       "id": "e4b850kb+RBapWXE3RezKby"
     },
@@ -17,8 +13,12 @@
       "id": "b1480jlYzVEQ5l66cxzpts+"
     },
     {
-      "folded": false,
+      "folded": true,
       "id": "81240yu5atJrZXCI0D5Iv/W"
+    },
+    {
+      "folded": true,
+      "id": "36ca0Ju3X1LE7ZhfuqmunI7"
     }
   ]
 }

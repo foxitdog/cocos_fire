@@ -9,6 +9,7 @@ window.mapblockwidth =''//地图的格子宽度
 window.movementblock=''//运动块
 window.attackblock=''//攻击块
 window.rolepool=''//角色池
+window.roleList=[]//角色列表
 window.movementblockpool=new cc.NodePool('movementblock')//运动块池
 window.movementblocks=[]//运动块对象数组，存放当前运动块对象，无时意为对象都到运动块池中 步骤：选中角色-显示移动区域和攻击区域
 window.gamenode=''//游戏节点
