@@ -17,7 +17,7 @@ var roles = {
         action_power: 0,//行动力
         x: 10,//地图中的位置x
         y: 10,//地图中的位置y
-        displacement: 5,//位移
+        displacement: 2,//位移
         icon: 0,
         team: 0,
     },
@@ -61,7 +61,7 @@ var roles = {
         action_power: 0,//行动力
         x: 10,//地图中的位置x
         y: 10,//地图中的位置y
-        displacement: 5,//位移
+        displacement:7,//位移
         icon: 0,
         team: 0,
     },
@@ -83,7 +83,7 @@ var roles = {
         action_power: 0,//行动力
         x: 10,//地图中的位置x
         y: 10,//地图中的位置y
-        displacement: 5,//位移
+        displacement: 8,//位移
         icon: 0,
         team: 0,
     },
@@ -105,7 +105,7 @@ var roles = {
         action_power: 0,//行动力
         x: 10,//地图中的位置x
         y: 10,//地图中的位置y
-        displacement: 5,//位移
+        displacement:9,//位移
         icon: 0,
         team: 0,
     },
@@ -127,7 +127,7 @@ var roles = {
         action_power: 0,//行动力
         x: 10,//地图中的位置x
         y: 10,//地图中的位置y
-        displacement: 5,//位移
+        displacement: 10,//位移
         icon: 0,
         team: 0,
     },

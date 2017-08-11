@@ -89,7 +89,7 @@ cc.Class({
 			r.id = "_" + i;
 			r.minattackrang = roles[r.id].minattackrang;
 			r.maxattackrang = roles[r.id].maxattackrang;
-			r._name = roles[r.id].name;// 名称
+			r.name_ = roles[r.id].name;// 名称
 			r.job = roles[r.id].job;// 职业
 			r.hp = roles[r.id].hp;// 血量
 			r.strength = roles[r.id].strength;// 力量

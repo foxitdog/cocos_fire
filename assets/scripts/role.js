@@ -1,10 +1,11 @@
 var roles = require('./rolesProperty');
+var touchedEvent = require('./touchedEvent');
 cc.Class({
 	extends: cc.Component,
 
 	properties: {
 		id: '',// 编号
-		_name: '_0',// 名称
+		name_: '_0',// 名称
 		job: 0,// 职业
 		maxattackrang: 5,//最大攻击范围
 		minattackrang: 1,//最小攻击范围
@@ -109,7 +110,7 @@ cc.Class({
 					} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
 						node = cc.instantiate(movementblock)
 						movementblockpool.put(node);
-						node = movementblockpool.get();
+						node = movementblockpool.get(touchedEvent.showAttackAreaAndCanBeAttacked);
 					}
 					node.getComponent('movementblock').movementblock = b
 					node.width = mapblockwidth
@@ -156,20 +157,18 @@ cc.Class({
 		this.y = y
 		// mapblocks[x*mapheightnum+y].getComponent("mapblock").notpass=true	
 	},
-	reuse: () => {
-		console.log(this)
-	},
-	unuse: () => {
-		// bn.getChildByName("Label").getComponent("cc.Label").string = role.menu[t];
-		// bn.setPosition(0, 0);
-		// if (role.menu[t] == 'move') {
-		// 	bn.on("touchend", movementblockShow(), this);
-		// } else if (role.menu[t] == 'prop') {
-		// 	bn.on("touchend", showMenu(), this);
-		// }
-		console.log(this)
+	reuse: function (func, obj) {
+		this.func = func;
+		this.obj = obj == undefined ? this : obj;
+		this.node.on("touchend", func, this.obj);
 	}
-
+	,
+	unuse: function () {
+		this.node.off("touchend", this.func, this.obj);
+		this.func = '';
+		this.obj = '';
+	}
+	,
 });
 
 function getattackblocks(that) {
@@ -420,7 +419,6 @@ function getmovementblocks(that) {
 						var role = roleNode.getComponent('role');
 						if (role.x == (g.x - 1) && role.y == g.y && role.team != that.team) {
 							hasEnemyOrNeutral = true;
-							console.log("hasEnemyOrNeutral")
 							return true;
 						}
 						return false;
@@ -468,7 +466,6 @@ function getmovementblocks(that) {
 						var role = roleNode.getComponent('role');
 						if (role.x == g.x && role.y == (g.y - 1) && role.team != that.team) {
 							hasEnemyOrNeutral = true;
-							console.log("hasEnemyOrNeutral")
 							return true;
 						}
 						return false;
@@ -516,7 +513,6 @@ function getmovementblocks(that) {
 						var role = roleNode.getComponent('role');
 						if (role.x == (g.x + 1) && role.y == g.y && role.team != that.team) {
 							hasEnemyOrNeutral = true;
-							console.log("hasEnemyOrNeutral")
 							return true;
 						}
 						return false;
@@ -565,7 +561,6 @@ function getmovementblocks(that) {
 						var role = roleNode.getComponent('role');
 						if (role.x == g.x && role.y == (g.y + 1) && role.team != that.team) {
 							hasEnemyOrNeutral = true;
-							console.log("hasEnemyOrNeutral")
 							return true;
 						}
 						return false;
