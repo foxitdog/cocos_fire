@@ -10,6 +10,7 @@ cc.Class({
 		maxattackrang: 5,//最大攻击范围
 		minattackrang: 1,//最小攻击范围
 		hp: 0,// 血量
+		nowHp: 0,//当前血量
 		strength: 0,// 力量
 		technic: 0,// 技巧
 		speed: 0,//速度
@@ -35,17 +36,22 @@ cc.Class({
 			}
 			buttonList.forEach((val) => {
 				buttonPool.put(val);
-				console.log('put')
-			})
-			movementblocks.every(val => {
-				movementblockpool.put(val)
-				return true
-			})
-			attackblocks.every(val => {
-				attackblockpool.put(val)
-				return true
 			})
 			buttonList = [];
+			menu.active = false;
+			movementblocks.forEach(val => {
+				movementblockpool.put(val)
+			})
+			movementblocks = []
+			attackblocks.forEach(val => {
+				attackblockpool.put(val)
+			})
+			attackblocks = [];
+			thisRoleAttackArea.forEach(val => {
+				attackblockpool.put(val)
+			})
+			thisRoleAttackArea = [];
+			// buttonList = [];
 			for (let t = 0; t < role.menu.length; t++) {
 				let func = {};
 				if (role.menu[t] == 'move') {
@@ -65,11 +71,11 @@ cc.Class({
 				bn.type = role.menu[t];
 				bn.getChildByName("Label").getComponent("cc.Label").string = role.menu[t];
 				bn.setPosition(0, 0);
-				if (role.menu[t] == 'move') {
-					bn.on("touchend", movementblockShow, this);
-				} else if (role.menu[t] == 'prop') {
-					bn.on("touchend", showMenu, this);
-				}
+				// if (role.menu[t] == 'move') {
+				// 	bn.on("touchend", movementblockShow, this);
+				// } else if (role.menu[t] == 'prop') {
+				// 	bn.on("touchend", showMenu, this);
+				// }
 				bn.parent = menu;
 				buttonList.push(bn);
 				menu.active = true;
@@ -81,6 +87,62 @@ cc.Class({
 				// })
 				// menu.active = false;
 				rolePanel.active = true;
+
+			}
+			function setInfoP(role) {
+				var i_head = infoP.getChildByName("head")
+				var headImg = i_head.getChildByName("sprite");
+				var h_layout = i_head.getChildByName("layout");
+				var h_l_name = h_layout.getChildByName("name");
+				var h_l_progressBar = h_layout.getChildByName("progressBar");
+				var h_l_hp = h_layout.getChildByName("hp");
+				var i_prop = infoP.getChildByName("proerties");
+				var p_firstC = i_prop.getChildByName("firstColoum");
+				var p_secondC = i_prop.getChildByName("secondColoum");
+				var p_f_strength = p_firstC.getChildByName("strength");
+				var p_f_magic = p_firstC.getChildByName("magic");
+				var p_f_speed = p_firstC.getChildByName("speed");
+				var p_f_technic = p_firstC.getChildByName("technic");
+				var p_f_defense = p_firstC.getChildByName("defense");
+				var p_f_magicDefense = p_firstC.getChildByName("magicDefense");
+				var p_s_strong = p_secondC.getChildByName("strong");
+				var p_s_displacement = p_secondC.getChildByName("displacement");
+				var p_s_property = p_secondC.getChildByName("property");
+				var p_s_state = p_secondC.getChildByName("state");
+				var p_s_layout1 = p_secondC.getChildByName("layout");
+				var p_s_layout2 = p_secondC.getChildByName("layout");
+
+			}
+
+			function setbagP(role) {
+				var b_list = bagP.getChildByName("list");//这是scrollView
+				var scrollVContent = b_list.getChildByName("content");
+				var b_thingTip = bagP.getChildByName("thingTip");
+				var t_layout = b_thingTip.getChildByName("layout");
+				var t_l_weaponName = t_layout.getChildByName("weaponName");
+				var t_l_w_n = t_l_weaponName.getChildByName("name");
+				var t_l_firstR = t_layout.getChildByName("firstRow");
+				var t_l_f_a = t_l_firstR.getChildByName("attack");
+				var t_l_f_r = t_l_firstR.getChildByName("rang");
+				var t_l_secondR = t_layout.getChildByName("secondRow");
+				var t_l_s_w = t_l_secondR.getChildByName("weight");
+				var t_l_s_t = t_l_secondR.getChildByName("type");
+				var t_l_thirdR = t_layout.getChildByName("thirdRow");
+				var t_l_t_b = t_l_thirdR.getChildByName("bisha");
+				var t_l_t_j = t_l_thirdR.getChildByName("jingzhun");
+				var t_l_f_a_n = t_l_f_a.getChildByName("number");
+				var t_l_f_r_n = t_l_f_r.getChildByName("number");
+				var t_l_s_w_n = t_l_s_w.getChildByName("number");
+				var t_l_s_t_n = t_l_s_t.getChildByName("number");
+				var t_l_t_b_n = t_l_t_b.getChildByName("number");
+				var t_l_t_j_n = t_l_t_j.getChildByName("number");
+				var t_sprite = b_thingTip.getChildByName("sprite");
+			}
+
+			function setProP() {
+				var p_list = proP.getChildByName("list");
+				var scrollVContent = cc.find("view/contetn", p_list);
+				
 			}
 
 
@@ -101,12 +163,12 @@ cc.Class({
 				thisrolenode = this.node
 				getmovementblocks(this)
 				getattackblocks(this)
-				movementblocks = [];
+				// movementblocks = [];
 				for (let i in this.movementblocks) {
 					let b = this.movementblocks[i]
 					let node;
 					if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-						node = movementblockpool.get();
+						node = movementblockpool.get(touchedEvent.showAttackAreaAndCanBeAttacked);
 					} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
 						node = cc.instantiate(movementblock)
 						movementblockpool.put(node);
@@ -121,7 +183,7 @@ cc.Class({
 					node.parent = gamenode
 					movementblocks.push(node)//存放块
 				}
-				attackblocks = [];
+				// attackblocks = [];
 				for (let i in this.attackblocks) {
 					let b = this.attackblocks[i]
 					let node;

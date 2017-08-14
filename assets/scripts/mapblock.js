@@ -13,27 +13,34 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.node.on("touchstart", event => {
-            console.log("touchstart");
-        })
+        // this.node.on("touchstart", event => {
+        //     console.log("touchstart");
+        // })
 
         this.node.on("touchend", event => {
-            console.log("touchend");
-            console.log('x:' + this.x + ",y:" + this.y)
+            // console.log("touchend");
+            // console.log('x:' + this.x + ",y:" + this.y)
             buttonList.forEach((val) => {
                 buttonPool.put(val);
-                console.log('asdfasdf')
             })
             menu.active = false;
-            movementblocks.every(val => {
+            buttonList = [];
+            movementblocks.forEach(val => {
                 movementblockpool.put(val)
-                return true
             })
-            attackblocks.every(val => {
+            movementblocks = []
+            attackblocks.forEach(val => {
                 attackblockpool.put(val)
-                return true
             })
-
+            attackblocks = [];
+            thisRoleAttackArea.forEach(val => {
+                attackblockpool.put(val)
+            })
+            thisRoleAttackArea = [];
+            canBeAttacked.forEach(val => {
+                movementblockpool.put(val)
+            })
+            canBeAttacked = [];
         })
 
 

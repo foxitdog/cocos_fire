@@ -1,22 +1,22 @@
 function showAttackAreaAndCanBeAttacked() {//显示攻击范围和可以被攻击的东西 this = movementblock
-    buttonList.forEach((val) => {
-        buttonPool.put(val);
-        console.log('asdfasdf')
+    // buttonList.forEach((val) => {
+    //     buttonPool.put(val);
+    // })
+    // menu.active = false;
+    movementblocks.forEach(val => {
+        movementblockpool.put(val)
     })
-    menu.active = false;
+    movementblocks = []
+    attackblocks.forEach(val => {
+        attackblockpool.put(val)
+    })
+    attackblocks = [];
+    thisRoleAttackArea.forEach(val => {
+        attackblockpool.put(val)
+    })
+    thisRoleAttackArea = [];
     let role = thisrolenode.getComponent('role')
     role.setPosition(this.movementblock.x, this.movementblock.y)
-    // thisrolenode.setPosition(this.movementblock.x*mapblockwidth,this.movementblock.y*mapblockwidth)
-    // role.x=this.movementblock.x
-    // role.y=this.movementblock.y
-    movementblocks.every(val => {
-        movementblockpool.put(val)
-        return true
-    })
-    attackblocks.every(val => {
-        attackblockpool.put(val)
-        return true
-    })
     getAttackArea(role)
     for (let i in role.attackblocks) {
         let b = role.attackblocks[i]
@@ -36,23 +36,24 @@ function showAttackAreaAndCanBeAttacked() {//显示攻击范围和可以被攻�
         //[126,7,2,150] 红色
         node.parent = gamenode;
         thisRoleAttackArea.push(node);//存放块
-        console.log('123333')
+        // console.log('123333')
     }
     var t = role.team;
     roleList.forEach(r => {
         var ro = r.getComponent("role");
         if (ro.team != t) {
             thisRoleAttackArea.forEach(ab => {
-                if (ab.x == ro.x && ab.y == ro.y) {
+                let attackblock = ab.getComponent("attackblock").attackblock;
+                if (attackblock.x == ro.x && attackblock.y == ro.y) {
                     let node;
                     if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-                        node = movementblockpool.get();
+                        node = movementblockpool.get(attack.bind(ro));
                     } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
                         node = cc.instantiate(movementblock)
                         movementblockpool.put(node);
                         node = movementblockpool.get(attack.bind(ro));
                     }
-                    node.setPosition(ro.x, ro.y);
+                    node.setPosition(ab.x, ab.y);
                     node.parent = gamenode;
                     canBeAttacked.push(node);
                 }
@@ -63,7 +64,7 @@ function showAttackAreaAndCanBeAttacked() {//显示攻击范围和可以被攻�
 }
 
 function attack() {//攻击角色 this = 攻击发起人
-
+    console.log("attack");
 }
 
 function getAttackArea(role) {//移动块被点击后出现的攻击区域的获取函数 this = 当前role脚本组件
@@ -577,10 +578,10 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
     } while (isable > 0);
 }
 
-module.exports={
-    showAttackAreaAndCanBeAttacked:showAttackAreaAndCanBeAttacked,
-    attack:attack,
-    getAttackArea:getAttackArea,
-    getattackblocks:getattackblocks,
-    getmovementblocks:getmovementblocks,
+module.exports = {
+    showAttackAreaAndCanBeAttacked: showAttackAreaAndCanBeAttacked,
+    attack: attack,
+    getAttackArea: getAttackArea,
+    getattackblocks: getattackblocks,
+    getmovementblocks: getmovementblocks,
 }
