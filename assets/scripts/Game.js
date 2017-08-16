@@ -93,6 +93,7 @@ cc.Class({
 			r.job = roles[r.id].job;// 职业
 			r.hp = roles[r.id].hp;// 血量
 			r.strength = roles[r.id].strength;// 力量
+			r.magic = roles[r.id].magic;// 力量
 			r.technic = roles[r.id].technic;// 技巧
 			r.speed = roles[r.id].speed;//速度
 			r.Physical_defense = roles[r.id].Physical_defense;//物防

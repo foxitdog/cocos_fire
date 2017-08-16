@@ -20,11 +20,11 @@ cc.Class({
         this.node.on("touchend", event => {
             // console.log("touchend");
             // console.log('x:' + this.x + ",y:" + this.y)
-            buttonList.forEach((val) => {
-                buttonPool.put(val);
+            menu_buttonList.forEach((val) => {
+                menu_buttonPool.put(val);
             })
             menu.active = false;
-            buttonList = [];
+            menu_buttonList = [];
             movementblocks.forEach(val => {
                 movementblockpool.put(val)
             })

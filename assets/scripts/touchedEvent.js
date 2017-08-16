@@ -1,21 +1,35 @@
 function showAttackAreaAndCanBeAttacked() {//显示攻击范围和可以被攻击的东西 this = movementblock
-    // buttonList.forEach((val) => {
-    //     buttonPool.put(val);
+    // menu_buttonList.forEach((val) => {
+    //     menu_buttonPool.put(val);
     // })
     // menu.active = false;
+    let role = thisrolenode.getComponent('role');
+    if (roleList.some(val => {
+        var r = val.getComponent('role');
+        var m = this.getComponent('movementblock').movementblock;
+        if (r.x == m.x && r.y == m.y && r.id != role.id) {
+            return true;
+        }
+        return false;
+    })) {
+        return
+    }
     movementblocks.forEach(val => {
-        movementblockpool.put(val)
+        movementblockpool.put(val);
     })
-    movementblocks = []
+    movementblocks = [];
     attackblocks.forEach(val => {
-        attackblockpool.put(val)
+        attackblockpool.put(val);
     })
     attackblocks = [];
     thisRoleAttackArea.forEach(val => {
-        attackblockpool.put(val)
+        attackblockpool.put(val);
     })
     thisRoleAttackArea = [];
-    let role = thisrolenode.getComponent('role')
+    canBeAttacked.forEach(val => {
+        movementblockpool.put(val);
+    })
+    canBeAttacked = [];
     role.setPosition(this.movementblock.x, this.movementblock.y)
     getAttackArea(role)
     for (let i in role.attackblocks) {

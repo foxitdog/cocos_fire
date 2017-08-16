@@ -10,15 +10,18 @@ cc.Class({
 		maxattackrang: 5,//最大攻击范围
 		minattackrang: 1,//最小攻击范围
 		hp: 0,// 血量
-		nowHp: 0,//当前血量
+		nowHp: 15,//当前血量
 		strength: 0,// 力量
 		technic: 0,// 技巧
+		magic: 0,//魔力
 		speed: 0,//速度
 		Physical_defense: 0,//物防
 		Magic_defense: 0,//魔方
 		lunck: 0,//运气
 		strong: 0,//体格
 		action_power: 0,//行动力
+		property: '冰',
+		state: '中毒',
 		x: 10,//地图中的位置x
 		y: 10,//地图中的位置y
 		displacement: 5,//位移
@@ -34,10 +37,10 @@ cc.Class({
 			if (roles.hasOwnProperty(this.id)) {
 				role = roles[this.id]
 			}
-			buttonList.forEach((val) => {
-				buttonPool.put(val);
+			menu_buttonList.forEach((val) => {
+				menu_buttonPool.put(val);
 			})
-			buttonList = [];
+			menu_buttonList = [];
 			menu.active = false;
 			movementblocks.forEach(val => {
 				movementblockpool.put(val)
@@ -51,21 +54,27 @@ cc.Class({
 				attackblockpool.put(val)
 			})
 			thisRoleAttackArea = [];
-			// buttonList = [];
+			canBeAttacked.forEach(val => {
+				movementblockpool.put(val);
+			})
+			canBeAttacked = [];
+			// menu_buttonList = [];
 			for (let t = 0; t < role.menu.length; t++) {
 				let func = {};
 				if (role.menu[t] == 'move') {
 					func = movementblockShow;
 				} else if (role.menu[t] == 'prop') {
 					func = showMenu;
+				} else if (role.menu[t] == 'cancel') {
+					func = f_cancel;
 				}
 				let bn;
-				if (buttonPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-					bn = buttonPool.get(func, this);
+				if (menu_buttonPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+					bn = menu_buttonPool.get(func, this);
 				} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-					bn = cc.instantiate(button);
-					buttonPool.put(bn);
-					bn = buttonPool.get(func, this);
+					bn = cc.instantiate(menu_button);
+					menu_buttonPool.put(bn);
+					bn = menu_buttonPool.get(func, this);
 				}
 				// var x = new Number(Math.random()).toPrecision(5)
 				bn.type = role.menu[t];
@@ -77,41 +86,80 @@ cc.Class({
 				// 	bn.on("touchend", showMenu, this);
 				// }
 				bn.parent = menu;
-				buttonList.push(bn);
+				menu_buttonList.push(bn);
 				menu.active = true;
 			}
 			function showMenu() {
 				// m.active = false;
-				// buttonList.forEach((val) => {
-				// 	buttonPool.put(val);
+				// menu_buttonList.forEach((val) => {
+				// 	menu_buttonPool.put(val);
 				// })
 				// menu.active = false;
-				rolePanel.active = true;
-
+				propertiesPanel.active = true;
+				setInfoP(this);
 			}
+			function f_cancel() {
+				menu_buttonList.forEach((val) => {
+					menu_buttonPool.put(val);
+				})
+				menu_buttonList = [];
+			}
+
 			function setInfoP(role) {
 				var i_head = infoP.getChildByName("head")
 				var headImg = i_head.getChildByName("sprite");
 				var h_layout = i_head.getChildByName("layout");
 				var h_l_name = h_layout.getChildByName("name");
+				h_l_name.getComponent(cc.Label).string = role.name_;
+
 				var h_l_progressBar = h_layout.getChildByName("progressBar");
+
+				h_l_progressBar.getComponent(cc.ProgressBar).progress = Number((role.nowHp / role.hp).toFixed(2));
+
 				var h_l_hp = h_layout.getChildByName("hp");
+				h_l_hp.getComponent(cc.Label).string = role.nowHp + "/" + role.hp;
+
 				var i_prop = infoP.getChildByName("proerties");
 				var p_firstC = i_prop.getChildByName("firstColoum");
 				var p_secondC = i_prop.getChildByName("secondColoum");
 				var p_f_strength = p_firstC.getChildByName("strength");
+				p_f_strength.getChildByName("number").getComponent(cc.Label).string = role.strength;
 				var p_f_magic = p_firstC.getChildByName("magic");
+				p_f_magic.getChildByName("number").getComponent(cc.Label).string = role.magic;
 				var p_f_speed = p_firstC.getChildByName("speed");
+				p_f_speed.getChildByName("number").getComponent(cc.Label).string = role.speed;
 				var p_f_technic = p_firstC.getChildByName("technic");
+				p_f_technic.getChildByName("number").getComponent(cc.Label).string = role.technic;
 				var p_f_defense = p_firstC.getChildByName("defense");
+				p_f_defense.getChildByName("number").getComponent(cc.Label).string = role.Physical_defense;
 				var p_f_magicDefense = p_firstC.getChildByName("magicDefense");
+				p_f_magicDefense.getChildByName("number").getComponent(cc.Label).string = role.Magic_defense;
 				var p_s_strong = p_secondC.getChildByName("strong");
+				p_s_strong.getChildByName("number").getComponent(cc.Label).string = role.strong;
 				var p_s_displacement = p_secondC.getChildByName("displacement");
+				p_s_displacement.getChildByName("number").getComponent(cc.Label).string = role.displacement;
 				var p_s_property = p_secondC.getChildByName("property");
+				p_s_property.getChildByName("number").getComponent(cc.Label).string = role.property;
 				var p_s_state = p_secondC.getChildByName("state");
+				p_s_state.getChildByName("number").getComponent(cc.Label).string = role.state;
 				var p_s_layout1 = p_secondC.getChildByName("layout");
 				var p_s_layout2 = p_secondC.getChildByName("layout");
+			}
 
+			function setBagListItem(item) {
+				var blt_c_img = cc.find("content/img", item);
+				var blt_c_name = cc.find("content/name", item);
+				var blt_c_prop = cc.find("content/prop", item);
+				var blt_btn_action = cc.find("content/action", item);
+				var blt_btn_throw = cc.find("content/throw", item);
+				var blt_btn_cancel = cc.find("content/cancel", item);
+			}
+			function setProficiencyListItem(item) {
+				var plt_c_img = cc.find("content/img", item);
+				var plt_c_name = cc.find("content/name", item);
+				var plt_c_prop = cc.find("content/prop", item);
+				var plt_c_progressBar = cc.find("content/progressBar", item);
+				var plt_c_level = cc.find("content/level", item);
 			}
 
 			function setbagP(role) {
@@ -142,14 +190,14 @@ cc.Class({
 			function setProP() {
 				var p_list = proP.getChildByName("list");
 				var scrollVContent = cc.find("view/contetn", p_list);
-				
+
 			}
 
 
 			function movementblockShow() {
 				// console.time('touched')
-				buttonList.forEach((val) => {
-					buttonPool.put(val);
+				menu_buttonList.forEach((val) => {
+					menu_buttonPool.put(val);
 				})
 				menu.active = false;
 				movementblocks.every(val => {
