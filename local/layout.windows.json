@@ -84,7 +84,8 @@
         "timeline",
         "node-library"
       ]
-    }
+    },
+    "worker": {}
   },
   "panels": {
     "builder": {
@@ -94,8 +95,8 @@
       "height": 739
     },
     "preferences": {
-      "x": 524,
-      "y": 127,
+      "x": 536,
+      "y": 190,
       "width": 580,
       "height": 565
     },

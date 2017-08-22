@@ -102,9 +102,11 @@ cc.Class({
 			r.strong = roles[r.id].strong;//体格
 			r.action_power = roles[r.id].action_power;//行动力
 			r.displacement = roles[r.id].displacement;//位移
-			r.icon = roles[r.id].icon;
-			r.team = i % 2
-			r.setPosition(i * 2, i * 2)
+			r.icon = roles[r.id].icon;//头像
+			r.bags = roles[r.id].bags;//背包
+			r.proficiency = roles[r.id].icon;//图标
+			r.team = i % 2;
+			r.setPosition(i * 2, i * 2);
 			roleList.push(prefab)
 		}
 		// :}

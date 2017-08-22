@@ -10,6 +10,7 @@ cc.Class({
 		maxattackrang: 5,//最大攻击范围
 		minattackrang: 1,//最小攻击范围
 		hp: 0,// 血量
+		// asdfas
 		nowHp: 15,//当前血量
 		strength: 0,// 力量
 		technic: 0,// 技巧
@@ -22,6 +23,8 @@ cc.Class({
 		action_power: 0,//行动力
 		property: '冰',
 		state: '中毒',
+		bags: '',
+		proficiency: '',
 		x: 10,//地图中的位置x
 		y: 10,//地图中的位置y
 		displacement: 5,//位移
@@ -37,27 +40,9 @@ cc.Class({
 			if (roles.hasOwnProperty(this.id)) {
 				role = roles[this.id]
 			}
-			menu_buttonList.forEach((val) => {
-				menu_buttonPool.put(val);
-			})
-			menu_buttonList = [];
-			menu.active = false;
-			movementblocks.forEach(val => {
-				movementblockpool.put(val)
-			})
-			movementblocks = []
-			attackblocks.forEach(val => {
-				attackblockpool.put(val)
-			})
-			attackblocks = [];
-			thisRoleAttackArea.forEach(val => {
-				attackblockpool.put(val)
-			})
-			thisRoleAttackArea = [];
-			canBeAttacked.forEach(val => {
-				movementblockpool.put(val);
-			})
-			canBeAttacked = [];
+			//======================清理地图==================={:
+			clearMap();
+			//======================清理地图===================:}
 			// menu_buttonList = [];
 			for (let t = 0; t < role.menu.length; t++) {
 				let func = {};
@@ -97,12 +82,15 @@ cc.Class({
 				// menu.active = false;
 				propertiesPanel.active = true;
 				setInfoP(this);
+				setbagP(this);
+				setProP(this);
 			}
 			function f_cancel() {
 				menu_buttonList.forEach((val) => {
 					menu_buttonPool.put(val);
 				})
 				menu_buttonList = [];
+				menu.active = false;
 			}
 
 			function setInfoP(role) {
@@ -146,29 +134,65 @@ cc.Class({
 				var p_s_layout2 = p_secondC.getChildByName("layout");
 			}
 
-			function setBagListItem(item) {
-				var blt_c_img = cc.find("content/img", item);
-				var blt_c_name = cc.find("content/name", item);
-				var blt_c_prop = cc.find("content/prop", item);
-				var blt_btn_action = cc.find("content/action", item);
-				var blt_btn_throw = cc.find("content/throw", item);
-				var blt_btn_cancel = cc.find("content/cancel", item);
-			}
-			function setProficiencyListItem(item) {
-				var plt_c_img = cc.find("content/img", item);
-				var plt_c_name = cc.find("content/name", item);
-				var plt_c_prop = cc.find("content/prop", item);
-				var plt_c_progressBar = cc.find("content/progressBar", item);
-				var plt_c_level = cc.find("content/level", item);
-			}
-
+			/**
+			 * 
+			 * @param {object} role 
+			 */
 			function setbagP(role) {
+				bag_list_item_List.forEach(item => {
+					bag_list_item_Pool.put(item);
+				})
+				bag_list_item_List = [];
 				var b_list = bagP.getChildByName("list");//这是scrollView
 				var scrollVContent = b_list.getChildByName("content");
+				var bs = role.bags;
+				bs.forEach(item => {
+					let bli;
+					if (bag_list_item_Pool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+						bli = bag_list_item_Pool.get();
+					} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+						bli = cc.instantiate(bag_list_item);
+						bag_list_item_Pool.put(bli);
+						bli = bag_list_item_Pool.get();
+					}
+					setBagListItem(bli,item);
+					bag_list_item_List.push(bli);
+					bli.on("click", bliclick);
+				})
+			}
+
+			function bliclick() {//背包单独的详情
+				console.log('click');
+			}
+
+			/**
+			 * 设置背包列表项详情
+			 * @param {*} item 
+			 */
+			function setBagListItem(target,item) {
+				var blt_c_img = cc.find("content/img", target);
+
+				var blt_c_name = cc.find("content/name", target);
+				blt_c_name.getComponent(cc.Label).string = item.name;
+				var blt_c_prop = cc.find("content/prop", target);
+				blt_c_prop.getComponent(cc.Label).string = (item.naijudu - item.sunhao) + "/" + item.naijudu;
+				var blt_btn_action = cc.find("content/action", target);
+				var blt_btn_throw = cc.find("content/throw", target);
+				var blt_btn_cancel = cc.find("content/cancel", item);
+			}
+
+			/**
+			 * 物品详情
+			 * @param {*} item 
+			 */
+			function setitemsdata(item) {
 				var b_thingTip = bagP.getChildByName("thingTip");
 				var t_layout = b_thingTip.getChildByName("layout");
 				var t_l_weaponName = t_layout.getChildByName("weaponName");
 				var t_l_w_n = t_l_weaponName.getChildByName("name");
+				t_l_w_n.getComponent(cc.Label).string = item.name;
+				var t_l_w_l = t_l_weaponName.getChildByName("level");
+				t_l_w_l.getComponent(cc.Label).string = item.level;
 				var t_l_firstR = t_layout.getChildByName("firstRow");
 				var t_l_f_a = t_l_firstR.getChildByName("attack");
 				var t_l_f_r = t_l_firstR.getChildByName("rang");
@@ -179,20 +203,45 @@ cc.Class({
 				var t_l_t_b = t_l_thirdR.getChildByName("bisha");
 				var t_l_t_j = t_l_thirdR.getChildByName("jingzhun");
 				var t_l_f_a_n = t_l_f_a.getChildByName("number");
+				t_l_f_a_n.getComponent(cc.Label).string = item.attack;
 				var t_l_f_r_n = t_l_f_r.getChildByName("number");
+				t_l_f_r_n.getComponent(cc.Label).string =
+					item.maxattackrang == item.minattackrang ? item.maxattackrang : item.minattackrang + "~" + item.maxattackrang;
 				var t_l_s_w_n = t_l_s_w.getChildByName("number");
+				t_l_s_w_n.getComponent(cc.Label).string = item.weight;
 				var t_l_s_t_n = t_l_s_t.getChildByName("number");
+				t_l_s_t_n.getComponent(cc.Label).string = item.type;
 				var t_l_t_b_n = t_l_t_b.getChildByName("number");
+				t_l_t_b_n.getComponent(cc.Label).string = item.bisha;
 				var t_l_t_j_n = t_l_t_j.getChildByName("number");
+				t_l_t_j_n.getComponent(cc.Label).string = item.jinzhun;
 				var t_sprite = b_thingTip.getChildByName("sprite");
 			}
-
+			/**
+			 * 设置熟练度页
+			 */
 			function setProP() {
 				var p_list = proP.getChildByName("list");
 				var scrollVContent = cc.find("view/contetn", p_list);
 
 			}
 
+			/**
+			 * 设置熟练度列表项详情
+			 * @param {*} item 
+			 */
+			function setProficiencyListItem(item) {
+				var plt_c_img = cc.find("content/img", item);
+
+				var plt_c_name = cc.find("content/name", item);
+				plt_c_name.getComponent(cc.Label).string = item.name;
+				var plt_c_prop = cc.find("content/prop", item);
+				plt_c_name.getComponent(cc.Label).string = item.exp + "/" + item.needExp;
+				var plt_c_progressBar = cc.find("content/progressBar", item);
+				h_l_progressBar.getComponent(cc.ProgressBar).progress = Number((item.exp / item.needExp).toFixed(2));
+				var plt_c_level = cc.find("content/level", item);
+				plt_c_level.getComponent(cc.Label).string = item.level;
+			}
 
 			function movementblockShow() {
 				// console.time('touched')
@@ -293,7 +342,7 @@ function getattackblocks(that) {
 		for (let i in mvmtblcs) {
 			let x = mvmtblcs[i].x
 			let y = mvmtblcs[i].y
-			for (let r = min + 1; r <= rang; r++) {
+			for (let r = min; r <= rang; r++) {
 				for (let k = r; k > 0; k--) {
 					// console.log("r")
 					if (!(x + k >= mapwidthnum || y + r - k >= mapheightnum)) {
@@ -509,6 +558,7 @@ function getmovementblocks(that) {
 		mapblock: mapblocks[that.x * mapheightnum + that.y].getComponent('mapblock'),
 		displacement: that.displacement,
 		isable: true,//是否可以检查
+		type: 1,
 		x: that.x,
 		y: that.y,
 	}
