@@ -144,21 +144,25 @@ cc.Class({
 				})
 				bag_list_item_List = [];
 				var b_list = bagP.getChildByName("list");//这是scrollView
-				var scrollVContent = b_list.getChildByName("content");
+				var scrollVContent = b_list.getChildByName("view").getChildByName("content");
 				var bs = role.bags;
-				bs.forEach(item => {
-					let bli;
-					if (bag_list_item_Pool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-						bli = bag_list_item_Pool.get();
-					} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-						bli = cc.instantiate(bag_list_item);
-						bag_list_item_Pool.put(bli);
-						bli = bag_list_item_Pool.get();
-					}
-					setBagListItem(bli,item);
-					bag_list_item_List.push(bli);
-					bli.on("click", bliclick);
-				})
+				if (bs) {
+					bs.forEach(item => {
+						let bli;
+						if (bag_list_item_Pool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+							bli = bag_list_item_Pool.get();
+						} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+							bli = cc.instantiate(bag_list_item);
+							bag_list_item_Pool.put(bli);
+							bli = bag_list_item_Pool.get();
+						}
+						setBagListItem(bli, item);
+						bli.parent = scrollVContent;
+						bag_list_item_List.push(bli);
+						bli.on("click", bliclick);
+					})
+					scrollVContent.height = bs.length * 45 + 5;
+				}
 			}
 
 			function bliclick() {//背包单独的详情
@@ -169,16 +173,16 @@ cc.Class({
 			 * 设置背包列表项详情
 			 * @param {*} item 
 			 */
-			function setBagListItem(target,item) {
+			function setBagListItem(target, item) {
 				var blt_c_img = cc.find("content/img", target);
 
 				var blt_c_name = cc.find("content/name", target);
 				blt_c_name.getComponent(cc.Label).string = item.name;
 				var blt_c_prop = cc.find("content/prop", target);
 				blt_c_prop.getComponent(cc.Label).string = (item.naijudu - item.sunhao) + "/" + item.naijudu;
-				var blt_btn_action = cc.find("content/action", target);
-				var blt_btn_throw = cc.find("content/throw", target);
-				var blt_btn_cancel = cc.find("content/cancel", item);
+				var blt_btn_action = cc.find("operation/action", target);
+				var blt_btn_throw = cc.find("operation/throw", target);
+				var blt_btn_cancel = cc.find("operation/cancel", item);
 			}
 
 			/**

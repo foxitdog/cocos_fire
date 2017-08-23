@@ -318,149 +318,6 @@ function getattackblocks(that) {//移动操作--出现移动块和可攻击块--
             }
         }
     }
-    // console.log(atbs)
-    // console.timeEnd('attack')
-    // if (rang > 0) {
-    // for (let j = 0; j < rang; j++) {
-    // console.count('rang')
-    // if(j==0){
-    // for (let i in mvmtblcs) {
-    // let x = mvmtblcs[i].x
-    // let y = mvmtblcs[i].y
-    // if (x - 1 >= 0) {
-    // let key = (x - 1) * mapheightnum + y
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log(key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x - 1,
-    // y: y,
-    // }
-    // }
-    // }
-    // if (y - 1 >= 0) {
-    // let key = x * mapheightnum + (y - 1)
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log('_' + key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,//攻击范围的第几层
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x,
-    // y: y - 1,
-    // }
-    // }
-    // }
-    // if (x + 1 <= mapwidthnum - 1) {
-    // let key = (x + 1) * mapheightnum + y
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log('_' + key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x + 1,
-    // y: y,
-    // }
-    // }
-    // }
-    // if (y + 1 <= mapheightnum - 1) {
-    // let key = x * mapheightnum + (y + 1)
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log('_' + key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x,
-    // y: y + 1,
-    // }
-    // }
-    // }
-
-    // }
-    // }else{
-    // for (let i in atbs) {
-    // let x = atbs[i].x
-    // let y = atbs[i].y
-    // if (x - 1 >= 0) {
-    // let key = (x - 1) * mapheightnum + y
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log(key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x - 1,
-    // y: y,
-    // }
-    // }
-    // }
-    // if (y - 1 >= 0) {
-    // let key = x * mapheightnum + (y - 1)
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log('_' + key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,//攻击范围的第几层
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x,
-    // y: y - 1,
-    // }
-    // }
-    // }
-    // if (x + 1 <= mapwidthnum - 1) {
-    // let key = (x + 1) * mapheightnum + y
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log('_' + key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x + 1,
-    // y: y,
-    // }
-    // }
-    // }
-    // if (y + 1 <= mapheightnum - 1) {
-    // let key = x * mapheightnum + (y + 1)
-    // if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-    // console.log('_' + key)
-    // atbs['_' + key] = {
-    // position: key,
-    // mapblock: mapblocks[key].getComponent('mapblock'),
-    // displacement: j + 1,
-    // type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-    // isable: true,//是否可以检查
-    // x: x,
-    // y: y + 1,
-    // }
-    // }
-    // }
-
-    // }
-    // }
-
-    // }
-    // }
-
-
 }
 
 function getmovementblocks(that) {//移动操作--出现移动块和可攻击块----（这是可移动块的算法）this = 当前role脚本组件
@@ -684,11 +541,11 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
     } while (isable > 0);
 }
 
-
-function getmovementblocks(that) {//移动操作--出现移动块和可攻击块----（这是可移动块的算法）this = 当前role脚本组件  A*算法
+//在每一个可到达的角色上添加上一个最佳到达路径
+function getReleativeBlocks(that) {//移动操作--出现移动块和可攻击块----（这是可移动块的算法）this = 当前role脚本组件  A*算法
     that.releativeBlocks = {}
     let releativeBlocks = that.releativeBlocks
-    releativeBlocks['_' + (that.x * mapheightnum + that.y)] = {
+    let thisblock = {
         position: that.x * mapheightnum + that.y,
         mapblock: mapblocks[that.x * mapheightnum + that.y].getComponent('mapblock'),
         displacement: 0,
@@ -696,6 +553,7 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
         x: that.x,
         y: that.y,
     }
+    releativeBlocks['_' + (that.x * mapheightnum + that.y)] = thisblock
     var isable = 0;
     do {
         let gridB = {}
@@ -704,46 +562,62 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
             let g = val.mapblock
             if (val.isable) {
                 if (g.x - 1 >= 0) {
-                    let key = (g.x - 1) * mapheightnum + g.y;// 位置的键：5,6 js:为该对象位置
-                    // 标记唯一maplock和唯一gridlock
-                    // xx1(val, g, gridB, key, isable, movementblocks)
+                    let key = (g.x - 1) * mapheightnum + g.y;
                     let m = mapblocks[key].getComponent('mapblock')
+                    let he = val.displacement + m.xx;// 
                     var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
                     roleList.some(roleNode => {
                         var role = roleNode.getComponent('role');
                         if (role.x == (g.x - 1) && role.y == g.y && role.team != that.team) {
+                            role.canBeAttackedPath = []
+                            let cbatp = role.canBeAttackedPath;
+                            let rootblock = {
+                                position: key,//数组的序号
+                                mapblock: m,//mapblock脚本组件对象
+                                displacement: he,//当前移动点
+                                type: 1,//type 2：攻击块 1:移动块 0:无用
+                                isable: true,//可以被检测
+                                x: m.x,//该点的x坐标
+                                y: m.y,//该点的y坐标
+                            }
+                            cbatp.push(rootblock);
+                            let temp1 = {};
+                            Object.assign(temp1, releativeBlocks, gridB);
+                            let pathNode = getMinMovePath(thisblock, temp1, rootblock);
+                            while (pathNode) {
+                                cbatp.push(pathNode);
+                                let pathNode = getMinMovePath(thisblock, temp1, pathNode);
+                            }
                             hasEnemyOrNeutral = true;
                             return true;
                         }
                         return false;
                     })
                     if (!m.notpass && !hasEnemyOrNeutral) {
-                        let he = val.displacement + m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
-                        // 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
-                        if (releativeBlocks.hasOwnProperty('_' + key)) {// 边上这点的gridlock是否在gridBlocks检索集合中
-                            let t = releativeBlocks['_' + key];// 在则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
-                            if (he < t.displacement) {// 则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
-                                t.displacement = he;// 大于则替换行动性
-                                t.isable = true;// 设置可检索
-                                isable++;// 可检索数+1
+                        if (releativeBlocks.hasOwnProperty('_' + key)) {
+                            let t = releativeBlocks['_' + key];
+                            if (he < t.displacement) {
+                                t.displacement = he;
+                                t.isable = true;
+                                isable++;
                             }
                         } else {
-                            if (gridB.hasOwnProperty('_' + key)) {// 边上这点的gridlock是否在gridB检索集合中
-                                let t = gridB['_' + key];// 在则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
-                                if (he < t.displacement) {// 则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
-                                    t.displacement = he;// 大于则替换行动性
+                            if (gridB.hasOwnProperty('_' + key)) {
+                                let t = gridB['_' + key];
+                                if (he < t.displacement) {
+                                    t.displacement = he;
                                 }
                             } else {
                                 gridB['_' + key] = {
-                                    position: key,//数组的序号
-                                    mapblock: m,//mapblock脚本组件对象
-                                    displacement: he,//当前移动点
-                                    type: 1,//type 2：攻击块 1:移动块 0:无用
-                                    isable: true,//可以被检测
-                                    x: m.x,//该点的x坐标
-                                    y: m.y,//该点的y坐标
+                                    position: key,
+                                    mapblock: m,
+                                    displacement: he,
+                                    type: 1,
+                                    isable: true,
+                                    x: m.x,
+                                    y: m.y,
                                 }
-                                isable++;// 可检索数+1
+                                isable++;
                             }
                         }
                     }
@@ -753,17 +627,36 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
                     // 标记唯一maplock和唯一gridlock
                     // xx1(val, g, gridB, key, isable, movementblocks)
                     let m = mapblocks[key].getComponent('mapblock')
+                    let he = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
                     var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
                     roleList.some(roleNode => {
                         var role = roleNode.getComponent('role');
                         if (role.x == g.x && role.y == (g.y - 1) && role.team != that.team) {
+                            role.canBeAttackedPath = []
+                            let cbatp = role.canBeAttackedPath;
+                            let rootblock = {
+                                position: key,//数组的序号
+                                mapblock: m,//mapblock脚本组件对象
+                                displacement: he,//当前移动点
+                                type: 1,//type 2：攻击块 1:移动块 0:无用
+                                isable: true,//可以被检测
+                                x: m.x,//该点的x坐标
+                                y: m.y,//该点的y坐标
+                            }
+                            cbatp.push(rootblock);
+                            let temp1 = {};
+                            Object.assign(temp1, releativeBlocks, gridB);
+                            let pathNode = getMinMovePath(thisblock, temp1, rootblock);
+                            while (pathNode) {
+                                cbatp.push(pathNode);
+                                let pathNode = getMinMovePath(thisblock, temp1, pathNode);
+                            }
                             hasEnemyOrNeutral = true;
                             return true;
                         }
                         return false;
                     })
                     if (!m.notpass && !hasEnemyOrNeutral) {
-                        let he = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
                         // 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
                         if (releativeBlocks.hasOwnProperty('_' + key)) {// 边上这点的gridlock是否在gridBlocks检索集合中
                             let t = releativeBlocks['_' + key];// 在则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
@@ -798,17 +691,36 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
                     // 标记唯一maplock和唯一gridlock
                     // xx1(val, g, gridB, key, isable, movementblocks)
                     let m = mapblocks[key].getComponent('mapblock')
+                    let he = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
                     var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
                     roleList.some(roleNode => {
                         var role = roleNode.getComponent('role');
                         if (role.x == (g.x + 1) && role.y == g.y && role.team != that.team) {
+                            role.canBeAttackedPath = []
+                            let cbatp = role.canBeAttackedPath;
+                            let rootblock = {
+                                position: key,//数组的序号
+                                mapblock: m,//mapblock脚本组件对象
+                                displacement: he,//当前移动点
+                                type: 1,//type 2：攻击块 1:移动块 0:无用
+                                isable: true,//可以被检测
+                                x: m.x,//该点的x坐标
+                                y: m.y,//该点的y坐标
+                            }
+                            cbatp.push(rootblock);
+                            let temp1 = {};
+                            Object.assign(temp1, releativeBlocks, gridB);
+                            let pathNode = getMinMovePath(thisblock, temp1, rootblock);
+                            while (pathNode) {
+                                cbatp.push(pathNode);
+                                let pathNode = getMinMovePath(thisblock, temp1, pathNode);
+                            }
                             hasEnemyOrNeutral = true;
                             return true;
                         }
                         return false;
                     })
                     if (!m.notpass && !hasEnemyOrNeutral) {
-                        let he = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
                         // 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
                         if (releativeBlocks.hasOwnProperty('_' + key)) {// 边上这点的gridlock是否在gridBlocks检索集合中
                             let t = releativeBlocks['_' + key];// 在则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
@@ -844,17 +756,36 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
                     // xx1(val, g, gridB, key, isable, movementblocks)
                     // {:重复的部分
                     let m = mapblocks[key].getComponent('mapblock')
+                    let he = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
                     var hasEnemyOrNeutral = false;//是否有敌人或者中立人物
                     roleList.some(roleNode => {
                         var role = roleNode.getComponent('role');
                         if (role.x == g.x && role.y == (g.y + 1) && role.team != that.team) {
+                            role.canBeAttackedPath = []
+                            let cbatp = role.canBeAttackedPath;
+                            let rootblock = {
+                                position: key,//数组的序号
+                                mapblock: m,//mapblock脚本组件对象
+                                displacement: he,//当前移动点
+                                type: 1,//type 2：攻击块 1:移动块 0:无用
+                                isable: true,//可以被检测
+                                x: m.x,//该点的x坐标
+                                y: m.y,//该点的y坐标
+                            }
+                            cbatp.push(rootblock);
+                            let temp1 = {};
+                            Object.assign(temp1, releativeBlocks, gridB);
+                            let pathNode = getMinMovePath(thisblock, temp1, rootblock);
+                            while (pathNode) {
+                                cbatp.push(pathNode);
+                                let pathNode = getMinMovePath(thisblock, temp1, pathNode);
+                            }
                             hasEnemyOrNeutral = true;
                             return true;
                         }
                         return false;
                     })
                     if (!m.notpass && !hasEnemyOrNeutral) {
-                        let he = val.displacement - m.xx;// 检索点到边上剩余可行动性：检索点可行动性为2边上需求行动性为3，则无法到达；
                         // 当检索点可行动性为2边上需求行动性为2时则可以行动，到边上还剩可行动性为0，但已经到了边上这个点了，所以边上这点是运动的点。
                         if (releativeBlocks.hasOwnProperty('_' + key)) {// 边上这点的gridlock是否在gridBlocks检索集合中
                             let t = releativeBlocks['_' + key];// 在则比较前后两次的剩余可行动性是否大于0，大于则替换行动性
@@ -898,10 +829,81 @@ function getmovementblocks(that) {//移动操作--出现移动块和可攻击块
     } while (isable > 0);
 }
 
+function getMinMovePath(target, blocks, nowNode) {//role 选择移动的角色的对象 mvmtblc当前选中的movementBlock
+    var tempAr = blocks
+    if (target.x != nowNode.x || target.y != nowNode.y) {
+        var node = '';
+        if (nowNode.x - 1 >= 0) {
+            let key = (nowNode.x - 1) * mapheightnum + nowNode.y;// 位置的键：5,6 js:为该对象位置
+            if (tempAr.hasOwnProperty('_' + key)) {
+                if (tempAr['_' + key].displacement > nowNode.displacement) {
+                    if (node) {
+                        if (node.displacement < tempAr['_' + key].displacement) {
+                            node = tempAr['_' + key].displacement;
+                        }
+                    } else {
+                        node = tempAr['_' + key];
+                    }
+                }
+            }
+        }
+        if (nowNode.y - 1 >= 0) {
+            let key = nowNode.x * mapheightnum + (nowNode.y - 1);// 位置的键：5,6
+            if (tempAr.hasOwnProperty('_' + key)) {
+                if (tempAr['_' + key].displacement > nowNode.displacement) {
+                    if (node) {
+                        if (node.displacement < tempAr['_' + key].displacement) {
+                            node = tempAr['_' + key].displacement;
+                        }
+                    } else {
+                        node = tempAr['_' + key];
+                    }
+                }
+            }
+        }
+        if (nowNode.x + 1 <= mapwidthnum - 1) {
+            let key = (nowNode.x + 1) * mapheightnum + nowNode.y;// 位置的键：5,6
+            if (tempAr.hasOwnProperty('_' + key)) {
+                if (tempAr['_' + key].displacement > nowNode.displacement) {
+                    if (node) {
+                        if (node.displacement < tempAr['_' + key].displacement) {
+                            node = tempAr['_' + key].displacement;
+                        }
+                    } else {
+                        node = tempAr['_' + key];
+                    }
+                }
+            }
+        }
+        if (nowNode.y + 1 <= mapheightnum - 1) {
+            let key = (nowNode.x) * mapheightnum + (nowNode.y + 1);// 位置的键：5,6
+            if (tempAr.hasOwnProperty('_' + key)) {
+                if (tempAr['_' + key].displacement > nowNode.displacement) {
+                    if (node) {
+                        if (node.displacement < tempAr['_' + key].displacement) {
+                            node = tempAr['_' + key].displacement;
+                        }
+                    } else {
+                        node = tempAr['_' + key];
+                    }
+                }
+            }
+        }
+        if (node) {
+            return node;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     showAttackAreaAndCanBeAttacked: showAttackAreaAndCanBeAttacked,
     attack: attack,
     getAttackArea: getAttackArea,
     getattackblocks: getattackblocks,
     getmovementblocks: getmovementblocks,
+    getReleativeBlocks: getReleativeBlocks,//获取相对位移块
 }
