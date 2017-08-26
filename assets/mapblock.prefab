@@ -12,6 +12,22 @@
     "__type__": "cc.Node",
     "_name": "mapblock",
     "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_id": "",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -21,7 +37,6 @@
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
-    "_parent": null,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -29,10 +44,9 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 75,
+      "height": 75
     },
-    "_children": [],
     "_rotationX": 0,
     "_rotationY": 0,
     "_scaleX": 1,
@@ -46,37 +60,8 @@
     "_skewY": 0,
     "_localZOrder": 0,
     "_globalZOrder": 0,
-    "_tag": -1,
     "_opacityModifyRGB": false,
-    "_id": "",
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 2
-      },
-      {
-        "__id__": 3
-      }
-    ],
-    "_prefab": {
-      "__id__": 4
-    },
     "groupIndex": 0
-  },
-  {
-    "__type__": "a2cb0B+0E9KELRQQ+au6Zih",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "x": 0,
-    "y": 0,
-    "type": 0,
-    "icon": 0,
-    "state": [],
-    "xx": 1
   },
   {
     "__type__": "cc.Sprite",
@@ -86,7 +71,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "54536b80-b47c-4210-91e8-45ad5b649a6b"
+    },
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -103,6 +90,22 @@
     "_atlas": null
   },
   {
+    "__type__": "548d0JZyYxGB6P/1J7OWyb6",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "x": 0,
+    "y": 0,
+    "type": 0,
+    "icon": 0,
+    "state": [],
+    "xx": 1,
+    "notpass": false
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -110,7 +113,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c641evtH+FNJIT5KndkMgTM",
+    "fileId": "83b6bktBWJB9KtgrsmA/kLh",
     "sync": false
   }
 ]

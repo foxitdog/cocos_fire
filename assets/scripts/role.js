@@ -150,84 +150,46 @@ cc.Class({
 					bs.forEach(item => {
 						let bli;
 						if (bag_list_item_Pool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-							bli = bag_list_item_Pool.get();
+							bli = bag_list_item_Pool.get(item);
 						} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
 							bli = cc.instantiate(bag_list_item);
 							bag_list_item_Pool.put(bli);
-							bli = bag_list_item_Pool.get();
+							bli = bag_list_item_Pool.get(item);
 						}
-						setBagListItem(bli, item);
+						// setBagListItem(bli, item);
 						bli.parent = scrollVContent;
 						bag_list_item_List.push(bli);
-						bli.on("click", bliclick);
+						// bli.on("click", bliclick);
 					})
-					scrollVContent.height = bs.length * 45 + 5;
 				}
-			}
-
-			function bliclick() {//背包单独的详情
-				console.log('click');
-			}
-
-			/**
-			 * 设置背包列表项详情
-			 * @param {*} item 
-			 */
-			function setBagListItem(target, item) {
-				var blt_c_img = cc.find("content/img", target);
-
-				var blt_c_name = cc.find("content/name", target);
-				blt_c_name.getComponent(cc.Label).string = item.name;
-				var blt_c_prop = cc.find("content/prop", target);
-				blt_c_prop.getComponent(cc.Label).string = (item.naijudu - item.sunhao) + "/" + item.naijudu;
-				var blt_btn_action = cc.find("operation/action", target);
-				var blt_btn_throw = cc.find("operation/throw", target);
-				var blt_btn_cancel = cc.find("operation/cancel", item);
-			}
-
-			/**
-			 * 物品详情
-			 * @param {*} item 
-			 */
-			function setitemsdata(item) {
-				var b_thingTip = bagP.getChildByName("thingTip");
-				var t_layout = b_thingTip.getChildByName("layout");
-				var t_l_weaponName = t_layout.getChildByName("weaponName");
-				var t_l_w_n = t_l_weaponName.getChildByName("name");
-				t_l_w_n.getComponent(cc.Label).string = item.name;
-				var t_l_w_l = t_l_weaponName.getChildByName("level");
-				t_l_w_l.getComponent(cc.Label).string = item.level;
-				var t_l_firstR = t_layout.getChildByName("firstRow");
-				var t_l_f_a = t_l_firstR.getChildByName("attack");
-				var t_l_f_r = t_l_firstR.getChildByName("rang");
-				var t_l_secondR = t_layout.getChildByName("secondRow");
-				var t_l_s_w = t_l_secondR.getChildByName("weight");
-				var t_l_s_t = t_l_secondR.getChildByName("type");
-				var t_l_thirdR = t_layout.getChildByName("thirdRow");
-				var t_l_t_b = t_l_thirdR.getChildByName("bisha");
-				var t_l_t_j = t_l_thirdR.getChildByName("jingzhun");
-				var t_l_f_a_n = t_l_f_a.getChildByName("number");
-				t_l_f_a_n.getComponent(cc.Label).string = item.attack;
-				var t_l_f_r_n = t_l_f_r.getChildByName("number");
-				t_l_f_r_n.getComponent(cc.Label).string =
-					item.maxattackrang == item.minattackrang ? item.maxattackrang : item.minattackrang + "~" + item.maxattackrang;
-				var t_l_s_w_n = t_l_s_w.getChildByName("number");
-				t_l_s_w_n.getComponent(cc.Label).string = item.weight;
-				var t_l_s_t_n = t_l_s_t.getChildByName("number");
-				t_l_s_t_n.getComponent(cc.Label).string = item.type;
-				var t_l_t_b_n = t_l_t_b.getChildByName("number");
-				t_l_t_b_n.getComponent(cc.Label).string = item.bisha;
-				var t_l_t_j_n = t_l_t_j.getChildByName("number");
-				t_l_t_j_n.getComponent(cc.Label).string = item.jinzhun;
-				var t_sprite = b_thingTip.getChildByName("sprite");
+				scrollVContent.height = bs ? (bs.length * 45 + 5) : 0;
 			}
 			/**
 			 * 设置熟练度页
 			 */
 			function setProP() {
+				proficiency_list_item_List.forEach(item => {
+					proficiency_list_item_Pool.put(item);
+				})
+				proficiency_list_item_List = [];
 				var p_list = proP.getChildByName("list");
-				var scrollVContent = cc.find("view/contetn", p_list);
-
+				var scrollVContent = cc.find("view/content", p_list);
+				var pr = role.proficiency;
+				if (pr) {
+					pr.forEach(item => {
+						let pli;
+						if (proficiency_list_item_Pool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+							pli = proficiency_list_item_Pool.get(item);
+						} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+							pli = cc.instantiate(proficiency_list_item);
+							proficiency_list_item_Pool.put(pli);
+							pli = proficiency_list_item_Pool.get(item);
+						}
+						pli.parent = scrollVContent;
+						proficiency_list_item_List.push(pli);
+					})
+				}
+				scrollVContent.height = pr ? (pr.length * 95 + 5) : 0;
 			}
 
 			/**
@@ -409,149 +371,6 @@ function getattackblocks(that) {
 			}
 		}
 	}
-	// console.log(atbs)
-	// console.timeEnd('attack')
-	// if (rang > 0) {
-	// for (let j = 0; j < rang; j++) {
-	// console.count('rang')
-	// if(j==0){
-	// for (let i in mvmtblcs) {
-	// let x = mvmtblcs[i].x
-	// let y = mvmtblcs[i].y
-	// if (x - 1 >= 0) {
-	// let key = (x - 1) * mapheightnum + y
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log(key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x - 1,
-	// y: y,
-	// }
-	// }
-	// }
-	// if (y - 1 >= 0) {
-	// let key = x * mapheightnum + (y - 1)
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log('_' + key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,//攻击范围的第几层
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x,
-	// y: y - 1,
-	// }
-	// }
-	// }
-	// if (x + 1 <= mapwidthnum - 1) {
-	// let key = (x + 1) * mapheightnum + y
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log('_' + key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x + 1,
-	// y: y,
-	// }
-	// }
-	// }
-	// if (y + 1 <= mapheightnum - 1) {
-	// let key = x * mapheightnum + (y + 1)
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log('_' + key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x,
-	// y: y + 1,
-	// }
-	// }
-	// }
-
-	// }
-	// }else{
-	// for (let i in atbs) {
-	// let x = atbs[i].x
-	// let y = atbs[i].y
-	// if (x - 1 >= 0) {
-	// let key = (x - 1) * mapheightnum + y
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log(key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x - 1,
-	// y: y,
-	// }
-	// }
-	// }
-	// if (y - 1 >= 0) {
-	// let key = x * mapheightnum + (y - 1)
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log('_' + key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,//攻击范围的第几层
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x,
-	// y: y - 1,
-	// }
-	// }
-	// }
-	// if (x + 1 <= mapwidthnum - 1) {
-	// let key = (x + 1) * mapheightnum + y
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log('_' + key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x + 1,
-	// y: y,
-	// }
-	// }
-	// }
-	// if (y + 1 <= mapheightnum - 1) {
-	// let key = x * mapheightnum + (y + 1)
-	// if (!mvmtblcs.hasOwnProperty('_' + key) && !atbs.hasOwnProperty('_' + key)) {
-	// console.log('_' + key)
-	// atbs['_' + key] = {
-	// position: key,
-	// mapblock: mapblocks[key].getComponent('mapblock'),
-	// displacement: j + 1,
-	// type: (j + 1) > that.minattackrang ? 2 : 0,//type 2：攻击块 1:移动块 0:无用
-	// isable: true,//是否可以检查
-	// x: x,
-	// y: y + 1,
-	// }
-	// }
-	// }
-
-	// }
-	// }
-
-	// }
-	// }
-
-
 }
 
 function getmovementblocks(that) {

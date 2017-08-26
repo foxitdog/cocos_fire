@@ -3,12 +3,15 @@
   "appSecret": "",
   "excludeScenes": [],
   "includeAnySDK": false,
+  "includeSDKBox": false,
   "includeSdk": [
     "anysdk"
   ],
   "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
   "mergeStartScene": false,
   "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
   "orientation": {
     "landscapeLeft": true,
     "landscapeRight": true,
@@ -18,7 +21,7 @@
   "packageName": "org.cocos2d.complete_project",
   "privateKey": "",
   "renderMode": "0",
-  "startScene": "5dcd99cb-77a4-4c95-a7d8-4b5b45295ae5",
+  "startScene": "0d1ec6a5-f296-47e0-8667-07fba733952f",
   "title": "complete_project",
   "webOrientation": "auto"
 }

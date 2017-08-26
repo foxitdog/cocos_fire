@@ -43,13 +43,14 @@ cc.Class({
 	},
 	// use this for initialization
 	onLoad: function () {
-		gamenode = this.node
-		mapblocks = this.mapblocks
-		mapwidthnum = this.mapwidthnum
-		mapheightnum = this.mapheightnum
-		mapblockwidth = this.mapblockwidth
-		movementblock = this.movementblock
-		attackblock = this.attackblock
+		gamenode = this.node;
+		mapblocks = this.mapblocks;
+		mapwidthnum = this.mapwidthnum;
+		mapheightnum = this.mapheightnum;
+		mapblockwidth = this.mapblockwidth;
+		movementblock = this.movementblock;
+		attackblock = this.attackblock;
+		thingTip=cc.find("Canvas/propertiesPanel/pages/bagPanel/thingTip");
 		this.node.setPosition(0 - winsize.width / 2, 0 - winsize.height / 2)//设置地图原点在左下角
 
 		this.mapwidth = this.mapwidthnum * this.mapblockwidth //地图宽度

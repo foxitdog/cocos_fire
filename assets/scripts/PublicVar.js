@@ -27,12 +27,14 @@ window.canBeAttacked = [];//可以被攻击的人
 window.infoP = '';//这是其中的个人信息面板
 
 window.bagP = '';//这是其中的背包信息面板
+window.thingTip='';//物品详情
 
 window.proP = '';//这是其中的熟练度信息面板
 window.bag_list_item_Pool = new cc.NodePool('bagListItem');//按钮池
 window.bag_list_item_List = [];
 window.bag_list_item = '';//背包面板中的列表item
-
+window.proficiency_list_item_Pool = new cc.NodePool('proficiencyListItem');//按钮池
+window.proficiency_list_item_List = [];
 window.proficiency_list_item = '';//熟练度面板中的列表item
 window.clearMap = function () {//清理地图
     menu_buttonList.forEach((val) => {
