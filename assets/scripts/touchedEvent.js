@@ -18,12 +18,13 @@ function showAttackAreaAndCanBeAttacked() {//显示攻击范围和可以被攻�
     //==========================================================:}
 
     //============================= 计算角色行走路径 ============================={:
-    role.path = [];//行走路径
-    role.path.push(m);
-    var n = getMovePath(role, m);
-    while (n) {
-        n = getMovePath(role, n);
-    }
+    // role.path = [];//行走路径
+    // role.path.push(m);
+    // var n = getMovePath(role, m);
+    // while (n) {
+    //     n = getMovePath(role, n);
+    // }
+    role.path = getMovePath(role, m);//行走路径
     //==========================================================:}
 
     movementblocks.forEach(val => {
@@ -70,25 +71,41 @@ function showAttackAreaAndCanBeAttacked() {//显示攻击范围和可以被攻�
     //==========================================================:}
     //============================= 可攻击区域标注 ============================={:
     var t = role.team;
+    var attackblocksObj = role.attackblocks;
     roleList.forEach(r => {
         var ro = r.getComponent("role");
+        var key = ro.x * mapheightnum + ro.y;
         if (ro.team != t) {
-            thisRoleAttackArea.forEach(ab => {
-                let attackblock = ab.getComponent("attackblock").attackblock;
-                if (attackblock.x == ro.x && attackblock.y == ro.y) {
-                    let node;
-                    if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-                        node = movementblockpool.get(attack.bind(ro));
-                    } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-                        node = cc.instantiate(movementblock)
-                        movementblockpool.put(node);
-                        node = movementblockpool.get(attack.bind(ro));
-                    }
-                    node.setPosition(ab.x, ab.y);
-                    node.parent = gamenode;
-                    canBeAttacked.push(node);
+            if (attackblocksObj.hasOwnProperty("_" + key)) {
+                let mapb = mapblocks[key];
+                let node;
+                if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+                    node = movementblockpool.get(attack.bind(ro));
+                } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+                    node = cc.instantiate(movementblock)
+                    movementblockpool.put(node);
+                    node = movementblockpool.get(attack.bind(ro));
                 }
-            })
+                node.setPosition(mapb.x, mapb.y);
+                node.parent = gamenode;
+                canBeAttacked.push(node);
+            }
+            // thisRoleAttackArea.forEach(ab => {
+            //     let attackblock = ab.getComponent("attackblock").attackblock;
+            //     if (attackblock.x == ro.x && attackblock.y == ro.y) {
+            //         let node;
+            //         if (movementblockpool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            //             node = movementblockpool.get(attack.bind(ro));
+            //         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            //             node = cc.instantiate(movementblock)
+            //             movementblockpool.put(node);
+            //             node = movementblockpool.get(attack.bind(ro));
+            //         }
+            //         node.setPosition(ab.x, ab.y);
+            //         node.parent = gamenode;
+            //         canBeAttacked.push(node);
+            //     }
+            // })
         }
     })
     //==========================================================:}
@@ -101,74 +118,83 @@ function attack() {//攻击角色 this = 攻击发起人
 
 
 function getMovePath(role, mvmtblc) {//role 选择移动的角色的对象 mvmtblc当前选中的movementBlock
-    var tempAr = role.movementblocks
-    if (role.x != mvmtblc.x || role.y != mvmtblc.y) {
-        var node = '', max = '';
-        if (mvmtblc.x - 1 >= 0) {
-            let key = (mvmtblc.x - 1) * mapheightnum + mvmtblc.y;// 位置的键：5,6 js:为该对象位置
-            if (tempAr.hasOwnProperty('_' + key)) {
-                if (tempAr['_' + key].displacement > mvmtblc.displacement) {
-                    if (node) {
-                        if (node.displacement < tempAr['_' + key].displacement) {
-                            node = tempAr['_' + key].displacement;
+    var temp = [];
+    temp.push(mvmtblc);
+    var node = repeat(role, mvmtblc)
+    while (node) {
+        temp.push(node);
+        node = repeat(role, node);
+    }
+    return temp;
+    function repeat(role, mvmtblc) {
+        var tempAr = role.movementblocks
+        if (role.x != mvmtblc.x || role.y != mvmtblc.y) {
+            var node = '';
+            if (mvmtblc.x - 1 >= 0) {
+                let key = (mvmtblc.x - 1) * mapheightnum + mvmtblc.y;// 位置的键：5,6 js:为该对象位置
+                if (tempAr.hasOwnProperty('_' + key)) {
+                    if (tempAr['_' + key].displacement > mvmtblc.displacement) {
+                        if (node) {
+                            if (node.displacement < tempAr['_' + key].displacement) {
+                                node = tempAr['_' + key].displacement;
+                            }
+                        } else {
+                            node = tempAr['_' + key];
                         }
-                    } else {
-                        node = tempAr['_' + key];
                     }
                 }
             }
-        }
-        if (mvmtblc.y - 1 >= 0) {
-            let key = mvmtblc.x * mapheightnum + (mvmtblc.y - 1);// 位置的键：5,6
-            if (tempAr.hasOwnProperty('_' + key)) {
-                if (tempAr['_' + key].displacement > mvmtblc.displacement) {
-                    if (node) {
-                        if (node.displacement < tempAr['_' + key].displacement) {
-                            node = tempAr['_' + key].displacement;
+            if (mvmtblc.y - 1 >= 0) {
+                let key = mvmtblc.x * mapheightnum + (mvmtblc.y - 1);// 位置的键：5,6
+                if (tempAr.hasOwnProperty('_' + key)) {
+                    if (tempAr['_' + key].displacement > mvmtblc.displacement) {
+                        if (node) {
+                            if (node.displacement < tempAr['_' + key].displacement) {
+                                node = tempAr['_' + key].displacement;
+                            }
+                        } else {
+                            node = tempAr['_' + key];
                         }
-                    } else {
-                        node = tempAr['_' + key];
                     }
                 }
             }
-        }
-        if (mvmtblc.x + 1 <= mapwidthnum - 1) {
-            let key = (mvmtblc.x + 1) * mapheightnum + mvmtblc.y;// 位置的键：5,6
-            if (tempAr.hasOwnProperty('_' + key)) {
-                if (tempAr['_' + key].displacement > mvmtblc.displacement) {
-                    if (node) {
-                        if (node.displacement < tempAr['_' + key].displacement) {
-                            node = tempAr['_' + key].displacement;
+            if (mvmtblc.x + 1 <= mapwidthnum - 1) {
+                let key = (mvmtblc.x + 1) * mapheightnum + mvmtblc.y;// 位置的键：5,6
+                if (tempAr.hasOwnProperty('_' + key)) {
+                    if (tempAr['_' + key].displacement > mvmtblc.displacement) {
+                        if (node) {
+                            if (node.displacement < tempAr['_' + key].displacement) {
+                                node = tempAr['_' + key].displacement;
+                            }
+                        } else {
+                            node = tempAr['_' + key];
                         }
-                    } else {
-                        node = tempAr['_' + key];
                     }
                 }
             }
-        }
-        if (mvmtblc.y + 1 <= mapheightnum - 1) {
-            let key = (mvmtblc.x) * mapheightnum + (mvmtblc.y + 1);// 位置的键：5,6
-            if (tempAr.hasOwnProperty('_' + key)) {
-                if (tempAr['_' + key].displacement > mvmtblc.displacement) {
-                    if (node) {
-                        if (node.displacement < tempAr['_' + key].displacement) {
-                            node = tempAr['_' + key].displacement;
+            if (mvmtblc.y + 1 <= mapheightnum - 1) {
+                let key = (mvmtblc.x) * mapheightnum + (mvmtblc.y + 1);// 位置的键：5,6
+                if (tempAr.hasOwnProperty('_' + key)) {
+                    if (tempAr['_' + key].displacement > mvmtblc.displacement) {
+                        if (node) {
+                            if (node.displacement < tempAr['_' + key].displacement) {
+                                node = tempAr['_' + key].displacement;
+                            }
+                        } else {
+                            node = tempAr['_' + key];
                         }
-                    } else {
-                        node = tempAr['_' + key];
                     }
                 }
             }
-        }
-        if (node) {
-            role.path.push(node)
-            console.count('path');
-            return node;
+            if (node) {
+                console.count('path');
+                return node;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
-    } else {
-        return false;
     }
 }
 

@@ -90,7 +90,7 @@
     "_atlas": null
   },
   {
-    "__type__": "417c91syptG9rILeUFcnKcq",
+    "__type__": "b8054eA2xFPsbGnBVLEZcYa",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -104,7 +104,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "8b0563e9-ffe4-45f6-8979-60aebe242e1c"
     },
     "fileId": "c62e5XVLjNP47J+G8mL+Sq9",
     "sync": false

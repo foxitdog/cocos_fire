@@ -152,7 +152,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "7cf43193-c27e-48c8-9e10-36a345802ddc"
     },
     "fileId": "2c7030l56ZK/r5NOzQf7CRn",
     "sync": false
@@ -240,7 +240,7 @@
     }
   },
   {
-    "__type__": "e8021yVKrlDXq3hxbqWFiWI",
+    "__type__": "f0c75ooS41CAoYqQP1et1w5",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -254,7 +254,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "7cf43193-c27e-48c8-9e10-36a345802ddc"
     },
     "fileId": "acb61SFQ6VPgo0M1cNcG094",
     "sync": false

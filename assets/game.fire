@@ -21,7 +21,7 @@
     "_active": true,
     "_components": [],
     "_prefab": null,
-    "_id": "0d1ec6a5-f296-47e0-8667-07fba733952f",
+    "_id": "739fae59-8f11-41dc-b08b-a5e530e7b879",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -165,7 +165,7 @@
     "groupIndex": 0
   },
   {
-    "__type__": "cf1f1tPf9RPfJuFb1zwdjBI",
+    "__type__": "d1905+yVVJHq7k88rt7QObb",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -175,34 +175,37 @@
     "mapblocks": [],
     "roles": [],
     "role": {
-      "__uuid__": "1dcff477-0207-4a95-84e1-8b4d6cdb8285"
+      "__uuid__": "d0187fab-0e68-4be7-8129-2c069ef9b454"
     },
     "mapblock": {
-      "__uuid__": "bd629a53-1998-40ed-9f01-51e044bc32b6"
+      "__uuid__": "44b2ed3b-7ec6-4ec5-a768-b879fb289959"
     },
     "movementblock": {
-      "__uuid__": "7123b3b3-f346-4948-b90c-5a031648e799"
+      "__uuid__": "8b0563e9-ffe4-45f6-8979-60aebe242e1c"
     },
     "attackblock": {
-      "__uuid__": "7b4031d7-5080-4f92-bc1f-dc8ea01f7b2f"
+      "__uuid__": "ee66067d-0dd3-4c10-8cd1-f42e13ba564a"
     },
     "rolesSprite": [
       {
-        "__uuid__": "3823116b-7e9a-4d99-a078-736ef880bad9"
+        "__uuid__": "579d32db-b063-4dfe-b2ca-88c22c516e25"
       },
       {
-        "__uuid__": "5002bed1-e71c-40a4-9f08-11ae268932b8"
+        "__uuid__": "b45e116a-a52f-406b-9e13-ebeffc4db944"
       },
       {
-        "__uuid__": "08770e1c-203f-4721-bde4-b47c25dbba7b"
+        "__uuid__": "fbc4c3c2-dad3-4a07-bd5e-e47ba8a2ecea"
       },
       {
-        "__uuid__": "817fb755-e7f1-4865-8977-ad9992b60d38"
+        "__uuid__": "939299e4-4484-4a50-99a2-0863a8bba460"
+      },
+      {
+        "__uuid__": "35a8d352-aa2f-4a46-b5dd-21ca81f9864a"
       }
     ],
     "mapblockSprite": [
       {
-        "__uuid__": "54536b80-b47c-4210-91e8-45ad5b649a6b"
+        "__uuid__": "4e9e7ea5-3af9-4df5-bb01-ee779c3ab4fa"
       }
     ],
     "mapwidthnum": 50,
@@ -10239,7 +10242,7 @@
     "_fitHeight": true
   },
   {
-    "__type__": "a156fG/uxhM74ZqUV4l7iuM",
+    "__type__": "d7ed9+aLmFFbKCpBUxz5Uhf",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -10247,13 +10250,13 @@
     },
     "_enabled": true,
     "menu_button": {
-      "__uuid__": "aa485579-87fa-49fb-92ec-79af846d47d1"
+      "__uuid__": "7cf43193-c27e-48c8-9e10-36a345802ddc"
     },
     "bag_list_item": {
-      "__uuid__": "8fcfb5ed-5714-449e-b236-980e94772595"
+      "__uuid__": "40580e18-433d-4e3e-ab35-f37eef4f7227"
     },
     "proficiency_list_item": {
-      "__uuid__": "5a9cbbc3-16e4-4c73-8adc-632bdb41612a"
+      "__uuid__": "a483357d-47e7-4f52-92a0-6394385498d3"
     }
   }
 ]

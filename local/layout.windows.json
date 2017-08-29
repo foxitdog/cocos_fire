@@ -6,8 +6,8 @@
       "url": "app://editor/index.html",
       "windowType": "dockable",
       "x": -8,
-      "y": 0,
-      "width": 1932,
+      "y": -8,
+      "width": 1936,
       "height": 1056,
       "layout": {
         "children": [
@@ -18,7 +18,7 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 421,
+                "height": 424,
                 "type": "panel",
                 "width": 204
               },
@@ -27,12 +27,12 @@
                 "children": [
                   "assets"
                 ],
-                "height": 498,
+                "height": 502,
                 "type": "panel",
                 "width": 204
               }
             ],
-            "height": 922,
+            "height": 929,
             "type": "dock-v",
             "width": 204
           },
@@ -43,24 +43,24 @@
                 "children": [
                   "scene"
                 ],
-                "height": 421,
+                "height": 424,
                 "type": "panel",
-                "width": 1096
+                "width": 1099.984375
               },
               {
-                "active": 0,
+                "active": 1,
                 "children": [
                   "console",
                   "timeline"
                 ],
-                "height": 498,
+                "height": 502,
                 "type": "panel",
-                "width": 1096
+                "width": 1099.984375
               }
             ],
-            "height": 922,
+            "height": 929,
             "type": "dock-v",
-            "width": 1096
+            "width": 1099.984375
           },
           {
             "active": 0,
@@ -68,9 +68,9 @@
               "inspector",
               "node-library"
             ],
-            "height": 922,
+            "height": 929,
             "type": "panel",
-            "width": 602
+            "width": 604
           }
         ],
         "type": "dock-h"
@@ -106,8 +106,8 @@
       "height": 539
     },
     "code-editor": {
-      "x": 666,
-      "y": 27,
+      "x": 308,
+      "y": 0,
       "width": 956,
       "height": 821
     },
@@ -118,10 +118,16 @@
       "height": 1056
     },
     "project-settings": {
-      "x": 476,
-      "y": 242,
+      "x": 614,
+      "y": 35,
       "width": 600,
-      "height": 564
+      "height": 732
+    },
+    "timeline.event": {
+      "x": 1006,
+      "y": 445,
+      "width": 416,
+      "height": 438
     }
   }
 }
